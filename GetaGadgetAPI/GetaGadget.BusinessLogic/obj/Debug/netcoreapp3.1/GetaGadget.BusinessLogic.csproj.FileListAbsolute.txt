@@ -1,0 +1,9 @@
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.BusinessLogic\bin\Debug\netcoreapp3.1\GetaGadget.BusinessLogic.deps.json
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.BusinessLogic\bin\Debug\netcoreapp3.1\GetaGadget.BusinessLogic.dll
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.BusinessLogic\bin\Debug\netcoreapp3.1\GetaGadget.BusinessLogic.pdb
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.BusinessLogic\obj\Debug\netcoreapp3.1\GetaGadget.BusinessLogic.csprojAssemblyReference.cache
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.BusinessLogic\obj\Debug\netcoreapp3.1\GetaGadget.BusinessLogic.AssemblyInfoInputs.cache
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.BusinessLogic\obj\Debug\netcoreapp3.1\GetaGadget.BusinessLogic.AssemblyInfo.cs
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.BusinessLogic\obj\Debug\netcoreapp3.1\GetaGadget.BusinessLogic.csproj.CoreCompileInputs.cache
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.BusinessLogic\obj\Debug\netcoreapp3.1\GetaGadget.BusinessLogic.dll
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.BusinessLogic\obj\Debug\netcoreapp3.1\GetaGadget.BusinessLogic.pdb

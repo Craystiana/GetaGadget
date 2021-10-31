@@ -1,0 +1,15 @@
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.DataAccess\bin\Debug\netcoreapp3.1\GetaGadget.Domain.dll
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.DataAccess\obj\Debug\netcoreapp3.1\GetaGadget.DataAccess.csprojAssemblyReference.cache
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.DataAccess\obj\Debug\netcoreapp3.1\GetaGadget.DataAccess.AssemblyInfoInputs.cache
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.DataAccess\obj\Debug\netcoreapp3.1\GetaGadget.DataAccess.AssemblyInfo.cs
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.DataAccess\bin\Debug\netcoreapp3.1\GetaGadget.DataAccess.deps.json
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.DataAccess\bin\Debug\netcoreapp3.1\GetaGadget.DataAccess.runtimeconfig.json
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.DataAccess\bin\Debug\netcoreapp3.1\GetaGadget.DataAccess.runtimeconfig.dev.json
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.DataAccess\bin\Debug\netcoreapp3.1\GetaGadget.DataAccess.dll
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.DataAccess\bin\Debug\netcoreapp3.1\GetaGadget.DataAccess.pdb
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.DataAccess\bin\Debug\netcoreapp3.1\GetaGadget.Domain.pdb
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.DataAccess\obj\Debug\netcoreapp3.1\GetaGadget.DataAccess.csproj.CoreCompileInputs.cache
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.DataAccess\obj\Debug\netcoreapp3.1\GetaGadget.DataAccess.csproj.CopyComplete
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.DataAccess\obj\Debug\netcoreapp3.1\GetaGadget.DataAccess.dll
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.DataAccess\obj\Debug\netcoreapp3.1\GetaGadget.DataAccess.pdb
+D:\An4\Comert Electronic\Lab\GetaGadget\GetaGadgetAPI\GetaGadget.DataAccess\obj\Debug\netcoreapp3.1\GetaGadget.DataAccess.genruntimeconfig.cache
