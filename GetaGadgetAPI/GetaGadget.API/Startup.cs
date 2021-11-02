@@ -1,11 +1,19 @@
+using GetaGadget.BusinessLogic.Services;
 using GetaGadget.Common;
 using GetaGadget.DataAccess;
+using GetaGadget.DataAccess.Repositories;
+using GetaGadget.Domain.Entities;
+using GetaGadget.Domain.Interfaces;
+using GetaGadget.Domain.Interfaces.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System;
 
 namespace GetaGadget.API
 {
@@ -29,6 +37,41 @@ namespace GetaGadget.API
             services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()
                                                                                    .AllowAnyMethod()
                                                                                    .AllowAnyHeader()));
+
+            // UnitOfWork and Repositories
+            services.AddScoped<IUnitOfWork, UnitOfWork>(_ => new UnitOfWork(Settings.DatabaseConnectionString));
+            services.AddScoped<IRepository<UserRole>, Repository<UserRole>>();
+            services.AddScoped<IRepository<Product>, Repository<Product>>();
+            services.AddScoped<IRepository<ProductSpecification>, Repository<ProductSpecification>>();
+            services.AddScoped<IRepository<Provider>, Repository<Provider>>();
+            services.AddScoped<IRepository<DeliveryMethod>, Repository<DeliveryMethod>>();
+            services.AddScoped<IRepository<Category>, Repository<Category>>();
+            services.AddScoped<IRepository<Wishlist>, Repository<Wishlist>>();
+            services.AddScoped<IRepository<Order>, Repository<Order>>();
+            services.AddScoped<IRepository<OrderProduct>, Repository<OrderProduct>>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            // Services
+            services.AddScoped<UserService>();
+
+            // JWT authentication
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Settings.TokenSecretBytes),
+                    ValidateIssuer = false,
+                    ClockSkew = TimeSpan.Zero,
+                    ValidateAudience = false
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

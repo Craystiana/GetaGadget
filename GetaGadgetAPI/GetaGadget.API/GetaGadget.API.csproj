@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GetaGadget.BusinessLogic\GetaGadget.BusinessLogic.csproj" />
     <ProjectReference Include="..\GetaGadget.Common\GetaGadget.Common.csproj" />
     <ProjectReference Include="..\GetaGadget.DataAccess\GetaGadget.DataAccess.csproj" />
   </ItemGroup>
