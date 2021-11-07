@@ -19,6 +19,7 @@ namespace GetaGadget.BusinessLogic.Services
             var claims = new List<Claim>
             {
                 new Claim(((int)TokenClaim.UserId).ToString(), user.UserId.ToString()),
+                new Claim(((int)TokenClaim.UserRoleId).ToString(), user.UserRoleId.ToString()),
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor
