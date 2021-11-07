@@ -1,0 +1,7 @@
+{
+  "name": "GetaGadget",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

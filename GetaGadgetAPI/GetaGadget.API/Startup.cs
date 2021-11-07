@@ -88,6 +88,8 @@ namespace GetaGadget.API
 
             app.UseAuthorization();
 
+            app.UseCors("AllowAllOrigins");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

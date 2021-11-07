@@ -34,6 +34,8 @@ namespace GetaGadget.API.Controllers
                     {
                         FirstName = user.FirstName,
                         LastName = user.LastName,
+                        EmailAddress = user.EmailAddress,
+                        UserRole = user.UserRoleId,
                         Token = JwtService.GenerateToken(user)
                     });
                 }

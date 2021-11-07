@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons> -->
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" padding>
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" (keyup.enter)="loginForm.valid ? onSubmit(loginForm) : 1" style="height: 100%;">
+    <ion-grid style="height: inherit;">
+      <ion-row class="ion-align-items-center" style="height: 100%;">
+        <ion-col offset-sm="3" size-sm="6" >
+          <ion-card>
+            <ion-card-header class="ion-text-center">
+              <ion-card-title>
+                <ion-icon name="flash-sharp" color="warning"></ion-icon>
+                Login into GetaGadget
+                <ion-icon name="flash-sharp" color="warning"></ion-icon>
+              </ion-card-title>
+            </ion-card-header>
+            
+            <ion-card-content>
+              <ion-item class="item-content" color="transparent">
+                <ion-label position="floating">Email</ion-label>
+                <ion-input type="email" ngModel name="email" required #userCtrl="ngModel" pattern="[A-Za-z0-9._%+-]{1,}@[a-zA-Z]{1,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="userCtrl.touched && !userCtrl.valid" lines="none" color="transparent">
+                <ion-label color="danger">Please provide a valid email</ion-label>
+              </ion-item>
+              <ion-item color="transparent">
+                <ion-label position="floating">Password</ion-label>
+                <ion-input type="password" ngModel required name="password" #passCtrl="ngModel" minlength="1"
+                  clearOnEdit="false"> </ion-input>
+              </ion-item>
+  
+              <ion-button type="submit" [disabled]="!loginForm.valid" expand="block">{{_isLoading? "" : "Login"}}
+                <ion-spinner *ngIf="_isLoading"></ion-spinner>
+              </ion-button>
+  
+              <ion-item class="ion-text-center" [routerLink]="['/auth/register']" lines="none" color="transparent">
+                <ion-label color="secondary">
+                  Don't have an account? Register now!
+                </ion-label>
+              </ion-item>
+            </ion-card-content>
+            
+
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

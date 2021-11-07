@@ -1,4 +1,5 @@
-﻿using GetaGadget.Domain.DTO.User;
+﻿using GetaGadget.Common.Enums;
+using GetaGadget.Domain.DTO.User;
 using GetaGadget.Domain.Entities;
 using GetaGadget.Domain.Interfaces;
 using System;
@@ -27,6 +28,7 @@ namespace GetaGadget.BusinessLogic.Services
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     PhoneNumber = model.PhoneNumber,
+                    UserRoleId = (int)UserRoleType.User,
                     Salt = salt,
                     PasswordHash = CreatePasswordHash(model.Password, salt)
                 };
