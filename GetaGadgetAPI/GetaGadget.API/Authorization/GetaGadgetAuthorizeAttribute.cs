@@ -12,6 +12,30 @@ namespace GetaGadget.API.Authorization
 {
     public class GetaGadgetAuthorizeAttribute : Attribute, IAuthorizationFilter
     {
+        private readonly int[] _userRoles;
+
+        public GetaGadgetAuthorizeAttribute()
+        {
+            _userRoles = new int[]
+            {
+               (int) UserRoleType.Customer,
+               (int) UserRoleType.Admin
+            };
+        }
+
+        public GetaGadgetAuthorizeAttribute(UserRoleType userRole)
+        {
+            _userRoles = new int[]
+            {
+                (int) userRole
+            };
+        }
+
+        public GetaGadgetAuthorizeAttribute(UserRoleType[] userRoles)
+        {
+            _userRoles = (int[])userRoles.Select(ur => (int)ur);
+        }
+
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             try
@@ -34,7 +58,7 @@ namespace GetaGadget.API.Authorization
                     var jwtToken = (JwtSecurityToken)validatedToken;
                     int.TryParse(jwtToken.Claims.FirstOrDefault(x => x.Type == ((int)TokenClaim.UserId).ToString())?.Value, out var userRoleId);
 
-                    if (userRoleId != default)
+                    if (!_userRoles.Contains(userRoleId))
                     {
                         context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
                     }

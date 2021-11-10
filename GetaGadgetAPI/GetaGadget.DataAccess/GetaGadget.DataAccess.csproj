@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GetaGadget.Common\GetaGadget.Common.csproj" />
     <ProjectReference Include="..\GetaGadget.Domain\GetaGadget.Domain.csproj" />
   </ItemGroup>
 

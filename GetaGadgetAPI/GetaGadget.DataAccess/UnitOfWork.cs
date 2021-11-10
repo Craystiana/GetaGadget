@@ -15,7 +15,7 @@ namespace GetaGadget.DataAccess
 
         private IUserRepository _userRepository;
         private IRepository<UserRole> _userRoleRepository;
-        private IRepository<Product> _productRepository;
+        private IProductRepository _productRepository;
         private IRepository<ProductSpecification> _productSpecificationRepository;
         private IRepository<Provider> _providerRepository;
         private IRepository<DeliveryMethod> _deliveryMethodRepository;
@@ -36,7 +36,7 @@ namespace GetaGadget.DataAccess
 
         public IRepository<UserRole> UserRoleRepository => _userRoleRepository ??= new Repository<UserRole>(_context);
 
-        public IRepository<Product> ProductRepository => _productRepository ??= new Repository<Product>(_context);
+        public IProductRepository ProductRepository => _productRepository ??= new ProductRepository(_context);
 
         public IRepository<ProductSpecification> ProductSpecificationRepository => _productSpecificationRepository ??= new Repository<ProductSpecification>(_context);
 

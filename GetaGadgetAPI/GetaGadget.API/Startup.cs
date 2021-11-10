@@ -41,7 +41,6 @@ namespace GetaGadget.API
             // UnitOfWork and Repositories
             services.AddScoped<IUnitOfWork, UnitOfWork>(_ => new UnitOfWork(Settings.DatabaseConnectionString));
             services.AddScoped<IRepository<UserRole>, Repository<UserRole>>();
-            services.AddScoped<IRepository<Product>, Repository<Product>>();
             services.AddScoped<IRepository<ProductSpecification>, Repository<ProductSpecification>>();
             services.AddScoped<IRepository<Provider>, Repository<Provider>>();
             services.AddScoped<IRepository<DeliveryMethod>, Repository<DeliveryMethod>>();
@@ -50,6 +49,7 @@ namespace GetaGadget.API
             services.AddScoped<IRepository<Order>, Repository<Order>>();
             services.AddScoped<IRepository<OrderProduct>, Repository<OrderProduct>>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             // Services
             services.AddScoped<UserService>();

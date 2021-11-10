@@ -29,6 +29,8 @@ namespace GetaGadget.Domain.Entities
         [Required]
         public int CategoryId { get; set; }
 
+        public byte[] Photo { get; set; }
+
         public virtual ICollection<ProductSpecification> ProductSpecifications { get; set; }
         public virtual Provider Provider { get; set; }
         public virtual DeliveryMethod DeliveryMethod { get; set; }

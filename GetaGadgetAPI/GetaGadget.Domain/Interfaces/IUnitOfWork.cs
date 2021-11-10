@@ -8,7 +8,7 @@ namespace GetaGadget.Domain.Interfaces
     {
         IRepository<UserRole> UserRoleRepository { get; }
         IUserRepository UserRepository { get; }
-        IRepository<Product> ProductRepository { get; }
+        IProductRepository ProductRepository { get; }
         IRepository<ProductSpecification> ProductSpecificationRepository { get; }
         IRepository<Provider> ProviderRepository { get; }
         IRepository<DeliveryMethod> DeliveryMethodRepository { get; }

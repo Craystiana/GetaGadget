@@ -1,0 +1,66 @@
+﻿using GetaGadget.Common.Enums;
+using GetaGadget.Domain.Entities;
+using GetaGadget.Domain.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace GetaGadget.DataAccess.Repositories
+{
+    public class ProductRepository : Repository<Product>, IProductRepository
+    {
+        public ProductRepository(GetaGadgetContext context) : base(context) { }
+
+        public IEnumerable<Product> GetList(string search,
+                                        IEnumerable<int> providerIds,
+                                        IEnumerable<int> deliveryMethodIds,
+                                        IEnumerable<int> categoryIds,
+                                        int? sortById)
+        {
+            IQueryable<Product> products = _context.Products.Include(c => c.Provider)
+                                                 .Include(c => c.DeliveryMethod)
+                                                 .Include(c => c.Category);
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                products = products.Where(c => c.Name.Contains(search));
+            }
+
+            if (providerIds != null)
+            {
+                products = products.Where(c => providerIds.Contains(c.ProviderId));
+            }
+
+            if (deliveryMethodIds != null)
+            {
+                products = products.Where(c => deliveryMethodIds.Contains(c.DeliveryMethodId));
+            }
+
+            if (categoryIds != null)
+            {
+                products = products.Where(c => categoryIds.Contains(c.CategoryId));
+            }
+
+            if (sortById != null)
+            {
+                switch (sortById)
+                {
+                    case (int)SortType.Name:
+                        products = products.OrderBy(c => c.Name);
+                        break;
+
+                    case (int)SortType.Price:
+                        products = products.OrderBy(c => c.Price);
+                        break;
+
+                    case (int)SortType.Stock:
+                        products = products.OrderBy(c => c.Stock);
+                        break;
+                }
+            }
+
+            return products;
+        }
+    }
+}
