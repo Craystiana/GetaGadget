@@ -9,6 +9,11 @@ export const environment = {
 export const API_URL = 'https://localhost:44344';
 export const LOGIN_URL = '/user/login'; 
 export const REGISTER_URL = '/user/register';
+export const PRODUCT_EDIT_URL = '/product/edit';
+export const PRODUCT_DATA_URL = '/product/data';
+export const PRODUCT_DETAIL_URL = '/product/detail?productId=';
+export const PRODUCT_DELETE_URL = '/product/delete?productId=';
+export const PRODUCT_LIST_URL = '/product/list';
 
 /*
  * For easier debugging in development mode, you can import the following file

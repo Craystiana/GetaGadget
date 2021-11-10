@@ -1,0 +1,90 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/product"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{productId > 0 ? 'Edit' : 'Add'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form #editForm="ngForm" (ngSubmit)="onEdit(editForm)" style="height: 100%;">
+    <ion-grid style="height: inherit;" *ngIf="this.product !== undefined">
+      <ion-row class="ion-align-items-center" style="height: 100%;">
+        <ion-col offset-sm="3" size-sm="6">
+          <ion-card *ngIf="this.productData !== undefined">
+            <ion-card-header class="ion-text-center">
+              <ion-card-title>
+                <ion-icon name="flash-sharp" color="warning"></ion-icon>
+                {{productId > 0 ? 'Edit Product' : 'Add a Product'}}
+                <ion-icon name="flash-sharp" color="warning"></ion-icon>
+              </ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-item class="item-content">
+                <ion-label position="floating">Name</ion-label>
+                <ion-input type="text" [ngModel]="this.product.name" name="name" required #nameCtrl="ngModel"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="nameCtrl.touched && !nameCtrl.valid" lines="none">
+                <ion-label color="danger">Please input the name of the product</ion-label>
+              </ion-item>
+
+              <ion-item class="item-content">
+                <ion-label position="floating">Description</ion-label>
+                <ion-input type="text" [ngModel]="this.product.description" name="description" required #descriptionCtrl="ngModel"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="descriptionCtrl.touched && !descriptionCtrl.valid" lines="none">
+                <ion-label color="danger">Please input the description of the product</ion-label>
+              </ion-item>
+
+              <ion-item class="item-content">
+                <ion-label position="floating">Price</ion-label>
+                <ion-input type="number" inputmode="numeric" [ngModel]="this.product.price" name="price" required #priceCtrl="ngModel" value="0"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="priceCtrl.touched && !priceCtrl.valid" lines="none">
+                <ion-label color="danger">Please input the price of the product</ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Stock</ion-label>
+                <ion-input type="number" inputmode="numeric" [ngModel]="this.product.stock" name="stock" required #stockCtrl="ngModel" value="0"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="stockCtrl.touched && !stockCtrl.valid" lines="none">
+                <ion-label color="danger">Please enter the stock of the product</ion-label>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Provider</ion-label>
+                <ion-select [ngModel]="this.product.provider" required name="provider" mode="ios">
+                  <ion-select-option *ngFor="let provider of productData.providers" [value]="provider.id">{{provider.name}}</ion-select-option></ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Delivery Method</ion-label>
+                <ion-select [ngModel]="this.product.deliveryMethod" required name="deliveryMethod" mode="ios">
+                  <ion-select-option *ngFor="let deliveryMethod of productData.deliveryMethods" [value]="deliveryMethod.id">{{deliveryMethod.name}}</ion-select-option></ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating">Category</ion-label>
+                <ion-select [ngModel]="this.product.category" required name="category" mode="ios">
+                  <ion-select-option *ngFor="let category of productData.categories" [value]="category.id">{{category.name}}</ion-select-option></ion-select>
+              </ion-item>
+
+              <ion-item class="item-content">
+                <ion-label position="stacked">Photo</ion-label>
+                <ion-input type="file" ngModel name="photo" (change)="onDocumentUpload($event.target.files)"></ion-input>
+              </ion-item>
+
+              <ion-button type="submit" [disabled]="!editForm.valid || isPictureLoaded === false" expand="block">
+                {{isLoading? "": productId > 0 ? 'Edit' : 'Add'}}
+                <ion-spinner *ngIf="isLoading"></ion-spinner>
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

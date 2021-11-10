@@ -41,7 +41,7 @@ export class AuthPage implements OnInit {
             this.router.navigateByUrl("/home");
           }
           this._isLoading = false;
-          loginForm.reset();
+          loginForm.resetForm();
         },
         error => {
           this.toastCtrl.create({

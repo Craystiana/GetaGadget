@@ -1,4 +1,5 @@
-﻿using GetaGadget.Domain.DTO.Product;
+﻿using GetaGadget.Domain.DTO.Generic;
+using GetaGadget.Domain.DTO.Product;
 using GetaGadget.Domain.Entities;
 using GetaGadget.Domain.Interfaces;
 using System;
@@ -22,7 +23,7 @@ namespace GetaGadget.BusinessLogic.Services
 
             return new ProductModel()
             {
-                Id = product.ProductId,
+                ProductId = product.ProductId,
                 Name = product.Name,
                 Description = product.Description,
                 Price = product.Price,
@@ -40,7 +41,7 @@ namespace GetaGadget.BusinessLogic.Services
 
             return new ProductEditModel()
             {
-                Id = product.ProductId,
+                ProductId = product.ProductId,
                 Name = product.Name,
                 Description = product.Description,
                 Price = product.Price,
@@ -52,12 +53,22 @@ namespace GetaGadget.BusinessLogic.Services
             };
         }
 
+        public ProductDataModel GetProductData()
+        {
+            return new ProductDataModel
+            {
+                Providers = _unitOfWork.ProviderRepository.GetAll().Select(ct => new GenericModel { Id = ct.ProviderId, Name = ct.Name }),
+                DeliveryMethods = _unitOfWork.DeliveryMethodRepository.GetAll().Select(ct => new GenericModel { Id = ct.DeliveryMethodId, Name = ct.Name }),
+                Categories = _unitOfWork.CategoryRepository.GetAll().Select(ct => new GenericModel { Id = ct.CategoryId, Name = ct.Name })
+            };
+        }
+
         public IEnumerable<ProductModel> GetList(ProductQueryModel model)
         {
             return _unitOfWork.ProductRepository.GetList(model.SearchTerm, model.ProviderIds, model.DeliveryMethodIds, model.CategoryIds, model.SortById)
                                                 .Select(p => new ProductModel
                                                 {
-                                                    Id = p.ProductId,
+                                                    ProductId = p.ProductId,
                                                     Name = p.Name,
                                                     Description = p.Description,
                                                     Price = p.Price,
@@ -89,7 +100,7 @@ namespace GetaGadget.BusinessLogic.Services
 
         public void Edit(ProductEditModel model)
         {
-            var product = _unitOfWork.ProductRepository.Get((int)model.Id);
+            var product = _unitOfWork.ProductRepository.Get((int)model.ProductId);
 
             product.Name = model.Name;
             product.Description = model.Description;

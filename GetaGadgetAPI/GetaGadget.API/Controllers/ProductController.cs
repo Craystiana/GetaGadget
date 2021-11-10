@@ -8,6 +8,8 @@ using System;
 
 namespace GetaGadget.API.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class ProductController : Controller
     {
         private readonly ProductService _productService;
@@ -21,7 +23,7 @@ namespace GetaGadget.API.Controllers
 
         [HttpGet]
         [Route("Detail")]
-        [GetaGadgetAuthorizeAttribute]
+        [GetaGadgetAuthorize]
         public IActionResult Detail([FromQuery] int productId)
         {
             try
@@ -36,8 +38,24 @@ namespace GetaGadget.API.Controllers
         }
 
         [HttpGet]
+        [Route("Data")]
+        [GetaGadgetAuthorize]
+        public IActionResult Data()
+        {
+            try
+            {
+                return new JsonResult(_productService.GetProductData());
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Unable to fetch car data.\nError:\n" + e);
+                return new JsonResult(new ProductDataModel());
+            }
+        }
+
+        [HttpGet]
         [Route("Edit")]
-        [GetaGadgetAuthorizeAttribute(UserRoleType.Admin)]
+        [GetaGadgetAuthorize(UserRoleType.Admin)]
         public IActionResult Edit([FromQuery] int productId)
         {
             try
@@ -53,12 +71,12 @@ namespace GetaGadget.API.Controllers
 
         [HttpPost]
         [Route("Edit")]
-        [GetaGadgetAuthorizeAttribute(UserRoleType.Admin)]
+        [GetaGadgetAuthorize(UserRoleType.Admin)]
         public IActionResult Edit([FromBody] ProductEditModel model)
         {
             try
             {
-                if (model.Id != null)
+                if (model.ProductId != null)
                 {
                     _productService.Edit(model);
                 }
@@ -78,7 +96,7 @@ namespace GetaGadget.API.Controllers
 
         [HttpPost]
         [Route("List")]
-        [GetaGadgetAuthorizeAttribute]
+        [GetaGadgetAuthorize]
         public IActionResult List([FromBody] ProductQueryModel model)
         {
             try
@@ -94,7 +112,7 @@ namespace GetaGadget.API.Controllers
 
         [HttpPost]
         [Route("Delete")]
-        [GetaGadgetAuthorizeAttribute(UserRoleType.Admin)]
+        [GetaGadgetAuthorize(UserRoleType.Admin)]
         public IActionResult Delete([FromQuery] int productId)
         {
             try

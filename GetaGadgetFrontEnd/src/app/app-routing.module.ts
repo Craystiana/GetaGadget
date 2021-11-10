@@ -18,9 +18,14 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'product',
+    loadChildren: () => import('./product/product.module').then( m => m.ProductPageModule)
+  },
+  {
     path: "**",
     redirectTo: 'auth'
-  }
+  },
+
 ];
 
 @NgModule({

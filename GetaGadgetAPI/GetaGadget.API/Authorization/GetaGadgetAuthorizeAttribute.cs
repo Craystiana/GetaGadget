@@ -18,7 +18,7 @@ namespace GetaGadget.API.Authorization
         {
             _userRoles = new int[]
             {
-               (int) UserRoleType.Customer,
+               (int) UserRoleType.User,
                (int) UserRoleType.Admin
             };
         }
@@ -56,7 +56,7 @@ namespace GetaGadget.API.Authorization
                     }, out SecurityToken validatedToken);
 
                     var jwtToken = (JwtSecurityToken)validatedToken;
-                    int.TryParse(jwtToken.Claims.FirstOrDefault(x => x.Type == ((int)TokenClaim.UserId).ToString())?.Value, out var userRoleId);
+                    int.TryParse(jwtToken.Claims.FirstOrDefault(x => x.Type == ((int)TokenClaim.UserRoleId).ToString())?.Value, out var userRoleId);
 
                     if (!_userRoles.Contains(userRoleId))
                     {

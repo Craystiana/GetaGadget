@@ -12,6 +12,14 @@ namespace GetaGadget.DataAccess.Repositories
     {
         public ProductRepository(GetaGadgetContext context) : base(context) { }
 
+        public Product Get(int productId)
+        {
+            return _context.Products.Include(c => c.Provider)
+                                .Include(c => c.DeliveryMethod)
+                                .Include(c => c.Category)
+                                .FirstOrDefault(c => c.ProductId == productId);
+        }
+
         public IEnumerable<Product> GetList(string search,
                                         IEnumerable<int> providerIds,
                                         IEnumerable<int> deliveryMethodIds,

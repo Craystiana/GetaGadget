@@ -1,0 +1,120 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col size-lg="2">
+            <ion-title style="height: 100%;">Products</ion-title>
+          </ion-col>
+          
+          <ion-col offset-lg="2" size-lg="4">
+            <ion-searchbar mode="ios"
+                           debounce="500"
+                           animated
+                           color="dark"
+                           placeholder="Search Products"
+                           style="padding: inherit;"
+                           [(ngModel)]="searchTerm"
+                           (ionChange)="getProductList()"></ion-searchbar>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+  
+      <ion-button *ngIf="authService.isAdmin()" slot="end" color="dark" shape="round" title="Add Product" (click)="addPage()">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
+  
+  
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content *ngIf="productData !== undefined">
+    <ion-toolbar>
+      <ion-select placeholder="Provider"
+                  okText="Save"
+                  cancelText="Clear"
+                  slot="start"
+                  multiple
+                  class="ion-padding"
+                  mode="ios"
+                  name="Provider"
+                  [(ngModel)]="provider"
+                  (ionChange)="getProductList()"
+                  (ionCancel)="provider=null">
+        <ion-select-option *ngFor="let provider of productData.providers" [value]="provider.id">{{provider.name}}</ion-select-option>
+      </ion-select>
+  
+      <ion-select placeholder="Delivery Method"
+                  okText="Save"
+                  cancelText="Clear"
+                  slot="start"
+                  multiple
+                  class="ion-padding"
+                  mode="ios"
+                  [(ngModel)]="deliveryMethod"
+                  (ionChange)="getProductList()"
+                  (ionCancel)="deliveryMethod=null">
+        <ion-select-option *ngFor="let deliveryMethod of productData.deliveryMethods" [value]="deliveryMethod.id">{{deliveryMethod.name}}</ion-select-option>
+      </ion-select>
+  
+      <ion-select placeholder="Category" 
+                  okText="Save" 
+                  cancelText="Clear" 
+                  slot="start" 
+                  multiple 
+                  class="ion-padding"
+                  mode="ios" 
+                  [(ngModel)]="category" 
+                  (ionChange)="getProductList()"
+                  (ionCancel)="category=null">
+        <ion-select-option *ngFor="let category of productData.categories" [value]="category.id">{{category.name}}</ion-select-option>
+      </ion-select>
+  
+      <ion-select placeholder="Sort By"
+                  okText="Save"
+                  cancelText="Clear"
+                  slot="end"
+                  class="ion-padding"
+                  mode="ios"
+                  [(ngModel)]="sortBy" 
+                  (ionChange)="getProductList()"
+                  (ionCancel)="sortBy=null">
+        <ion-select-option [value]="sortType.Name">Name</ion-select-option>
+        <ion-select-option [value]="sortType.Price">Price</ion-select-option>
+        <ion-select-option [value]="sortType.Stock">Stock</ion-select-option>
+      </ion-select>
+    </ion-toolbar>
+  
+    <ion-grid>
+      <ion-row style="justify-content: center">
+        <ion-col size-lg="3" 
+                 *ngFor="let product of productList">
+          <ion-card [routerLink]="['/product/detail']" [queryParams]="{productId : product.productId}">
+            <img [src]="product.photo !== null ?
+             'data:image/jpg;base64,' + product.photo :
+             'https://www.zastavki.com/pictures/originals/2020Auto___Honda_Yellow_car_Honda_NSX_on_a_black_background_138992_.jpg'"
+            style="width: 100%; height: 200px;"/>
+            <ion-card-header class="ion-text-center">
+              <ion-card-title>{{product.name}}</ion-card-title>
+              <ion-card-subtitle>{{product.category}}</ion-card-subtitle>
+            </ion-card-header>
+        
+            <ion-card-content>
+              <ion-item lines="none" color="transparent">
+                <ion-icon name="star-half-outline" slot="start" color="warning"></ion-icon>
+                <ion-label>{{product.provider}}</ion-label>
+              </ion-item>
+        
+              <ion-item lines="none">
+                <ion-icon name="cash-outline" slot="start" color="success"></ion-icon> 
+                <ion-label>{{product.price}} RON</ion-label>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  

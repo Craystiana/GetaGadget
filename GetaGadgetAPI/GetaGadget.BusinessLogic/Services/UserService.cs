@@ -30,8 +30,7 @@ namespace GetaGadget.BusinessLogic.Services
                     PhoneNumber = model.PhoneNumber,
                     UserRoleId = (int)UserRoleType.User,
                     Salt = salt,
-                    PasswordHash = CreatePasswordHash(model.Password, salt),
-                    UserRoleId = 2
+                    PasswordHash = CreatePasswordHash(model.Password, salt)
                 };
 
                 UnitOfWork.UserRepository.Add(user);

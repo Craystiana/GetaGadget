@@ -53,6 +53,7 @@ namespace GetaGadget.API
 
             // Services
             services.AddScoped<UserService>();
+            services.AddScoped<ProductService>();
 
             // JWT authentication
             services.AddAuthentication(options =>
