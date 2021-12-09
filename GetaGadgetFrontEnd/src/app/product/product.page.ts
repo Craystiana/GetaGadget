@@ -22,6 +22,7 @@ export class ProductPage implements OnInit {
   private deliveryMethod: number[];
   private category: number[];
   private sortBy: number;
+  private inStock: boolean;
 
   public productList: Product[];
   public isLoading = false;
@@ -48,7 +49,8 @@ export class ProductPage implements OnInit {
                              this.deliveryMethod,
                              this.category,
                              this.sortBy,
-                             this.searchTerm);
+                             this.searchTerm,
+                             this.inStock);
 
     this.productService.getProductList(model).pipe(first()).subscribe(
       data =>{

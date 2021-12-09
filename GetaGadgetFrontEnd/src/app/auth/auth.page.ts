@@ -17,7 +17,7 @@ export class AuthPage implements OnInit {
   
   constructor(private authService: AuthService, private router: Router, private toastCtrl: ToastController) {
     if(this.authService.isAuthenticated()){
-      router.navigateByUrl('/home');
+      router.navigateByUrl('/product');
     }
   }
 
@@ -26,7 +26,7 @@ export class AuthPage implements OnInit {
 
   ionViewWillEnter(){
     if(this.authService.isAuthenticated()){
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/product');
     }
   }
 
@@ -38,7 +38,7 @@ export class AuthPage implements OnInit {
       .subscribe(
         data => {
           if(this.authService.isAuthenticated()){
-            this.router.navigateByUrl("/home");
+            this.router.navigateByUrl("/product");
           }
           this._isLoading = false;
           loginForm.resetForm();

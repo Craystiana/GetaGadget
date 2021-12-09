@@ -36,17 +36,17 @@ namespace GetaGadget.DataAccess.Repositories
                 products = products.Where(c => c.Name.Contains(search));
             }
 
-            if (providerIds != null)
+            if (providerIds != null && providerIds.Any())
             {
                 products = products.Where(c => providerIds.Contains(c.ProviderId));
             }
 
-            if (deliveryMethodIds != null)
+            if (deliveryMethodIds != null && deliveryMethodIds.Any())
             {
                 products = products.Where(c => deliveryMethodIds.Contains(c.DeliveryMethodId));
             }
 
-            if (categoryIds != null)
+            if (categoryIds != null && categoryIds.Any())
             {
                 products = products.Where(c => categoryIds.Contains(c.CategoryId));
             }

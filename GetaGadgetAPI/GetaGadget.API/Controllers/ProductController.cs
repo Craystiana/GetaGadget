@@ -32,7 +32,7 @@ namespace GetaGadget.API.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError("Unable to fetch car details for product with id " + productId + ".\nError:\n" + e);
+                _logger.LogError("Unable to fetch product details for product with id " + productId + ".\nError:\n" + e);
                 return new JsonResult(new ProductModel());
             }
         }
@@ -48,7 +48,7 @@ namespace GetaGadget.API.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError("Unable to fetch car data.\nError:\n" + e);
+                _logger.LogError("Unable to fetch product data.\nError:\n" + e);
                 return new JsonResult(new ProductDataModel());
             }
         }

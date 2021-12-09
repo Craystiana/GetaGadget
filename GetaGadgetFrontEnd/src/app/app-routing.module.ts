@@ -14,11 +14,12 @@ const routes: Routes = [
   },
   {
     path: 'product',
-    loadChildren: () => import('./product/product.module').then( m => m.ProductPageModule)
+    loadChildren: () => import('./product/product.module').then( m => m.ProductPageModule),
+    canLoad: [AuthGuard]
   },
   {
     path: "**",
-    redirectTo: 'auth'
+    redirectTo: 'product'
   },
 
 ];
