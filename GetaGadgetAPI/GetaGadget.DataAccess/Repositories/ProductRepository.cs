@@ -24,6 +24,7 @@ namespace GetaGadget.DataAccess.Repositories
                                         IEnumerable<int> providerIds,
                                         IEnumerable<int> deliveryMethodIds,
                                         IEnumerable<int> categoryIds,
+                                        bool? inStock,
                                         int? sortById)
         {
             IQueryable<Product> products = _context.Products.Include(c => c.Provider)
@@ -48,6 +49,11 @@ namespace GetaGadget.DataAccess.Repositories
             if (categoryIds != null)
             {
                 products = products.Where(c => categoryIds.Contains(c.CategoryId));
+            }
+
+            if (inStock == true)
+            {
+                products = products.Where(p => p.Stock > 0);
             }
 
             if (sortById != null)

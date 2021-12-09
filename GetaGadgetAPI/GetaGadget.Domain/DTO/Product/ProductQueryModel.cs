@@ -10,6 +10,8 @@ namespace GetaGadget.Domain.DTO.Product
 
         public IEnumerable<int> CategoryIds { get; set; }
 
+        public bool? InStock { get; set; }
+
         public int? SortById { get; set; }
 
         public string SearchTerm { get; set; }

@@ -65,7 +65,7 @@ namespace GetaGadget.BusinessLogic.Services
 
         public IEnumerable<ProductModel> GetList(ProductQueryModel model)
         {
-            return _unitOfWork.ProductRepository.GetList(model.SearchTerm, model.ProviderIds, model.DeliveryMethodIds, model.CategoryIds, model.SortById)
+            return _unitOfWork.ProductRepository.GetList(model.SearchTerm, model.ProviderIds, model.DeliveryMethodIds, model.CategoryIds, model.InStock, model.SortById)
                                                 .Select(p => new ProductModel
                                                 {
                                                     ProductId = p.ProductId,

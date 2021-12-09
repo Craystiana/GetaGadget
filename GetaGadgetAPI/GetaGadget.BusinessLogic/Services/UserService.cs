@@ -45,7 +45,7 @@ namespace GetaGadget.BusinessLogic.Services
         {
             var user = UnitOfWork.UserRepository.Get(emailAddress.Replace(" ", string.Empty));
 
-            if (user.PasswordHash == CreatePasswordHash(password, user.Salt))
+            if (user != null && user.PasswordHash == CreatePasswordHash(password, user.Salt))
             {
                 return user;
             }
