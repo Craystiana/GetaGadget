@@ -14,6 +14,10 @@ export const PRODUCT_DATA_URL = '/product/data';
 export const PRODUCT_DETAIL_URL = '/product/detail?productId=';
 export const PRODUCT_DELETE_URL = '/product/delete?productId=';
 export const PRODUCT_LIST_URL = '/product/list';
+export const ORDER_INDEX_URL = '/order';
+export const ORDER_ADD_URL = '/order/add';
+export const ORDER_DELETE_URL = '/order/delete';
+export const ORDER_HISTORY_URL = '/order/history'
 
 /*
  * For easier debugging in development mode, you can import the following file

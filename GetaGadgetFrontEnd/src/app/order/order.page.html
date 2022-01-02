@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size-lg="2">
+          <ion-title style="height: 100%;">Cart</ion-title>
+        </ion-col>
+  
+      </ion-row>
+    </ion-grid>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="order !== null">
+    <ion-row>
+      <ion-col *ngFor="product in order.Products">
+        {{product.Price}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-label></ion-label>
+
+</ion-content>

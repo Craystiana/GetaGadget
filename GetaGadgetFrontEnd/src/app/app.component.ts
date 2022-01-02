@@ -10,11 +10,6 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent {
   public appPages = [
     { title: 'Inbox', url: '/', icon: 'mail' },
-    { title: 'Outbox', url: '/', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/', icon: 'heart' },
-    { title: 'Archived', url: '/', icon: 'archive' },
-    { title: 'Trash', url: '/', icon: 'trash' },
-    { title: 'Spam', url: '/', icon: 'warning' },
   ];
 
   constructor(private authService: AuthService, private router: Router, private menu: MenuController) {}
@@ -29,6 +24,10 @@ export class AppComponent {
 
   public isAdmin(){
     return this.authService.isAdmin();
+  }
+
+  public onNavigate(url){
+    this.router.navigateByUrl(url);
   }
 
   public onLogout(){

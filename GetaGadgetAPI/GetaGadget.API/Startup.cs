@@ -46,7 +46,7 @@ namespace GetaGadget.API
             services.AddScoped<IRepository<DeliveryMethod>, Repository<DeliveryMethod>>();
             services.AddScoped<IRepository<Category>, Repository<Category>>();
             services.AddScoped<IRepository<Wishlist>, Repository<Wishlist>>();
-            services.AddScoped<IRepository<Order>, Repository<Order>>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IRepository<OrderProduct>, Repository<OrderProduct>>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
@@ -54,6 +54,7 @@ namespace GetaGadget.API
             // Services
             services.AddScoped<UserService>();
             services.AddScoped<ProductService>();
+            services.AddScoped<OrderService>();
 
             // JWT authentication
             services.AddAuthentication(options =>

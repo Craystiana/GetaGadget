@@ -18,10 +18,14 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'order',
+    loadChildren: () => import('./order/order.module').then( m => m.OrderPageModule),
+    canLoad: [AuthGuard]
+  },
+  {
     path: "**",
     redirectTo: 'product'
-  },
-
+  }
 ];
 
 @NgModule({

@@ -21,7 +21,7 @@ namespace GetaGadget.DataAccess
         private IRepository<DeliveryMethod> _deliveryMethodRepository;
         private IRepository<Category> _categoryRepository;
         private IRepository<Wishlist> _wishlistRepository;
-        private IRepository<Order> _orderRepository;
+        private IOrderRepository _orderRepository;
         private IRepository<OrderProduct> _orderProductRepository;
 
         public UnitOfWork(string connectionString)
@@ -48,7 +48,7 @@ namespace GetaGadget.DataAccess
 
         public IRepository<Wishlist> WishlistRepository => _wishlistRepository ??= new Repository<Wishlist>(_context);
 
-        public IRepository<Order> OrderRepository => _orderRepository ??= new Repository<Order>(_context);
+        public IOrderRepository OrderRepository => _orderRepository ??= new OrderRepository(_context);
 
         public IRepository<OrderProduct> OrderProductRepository => _orderProductRepository ??= new Repository<OrderProduct>(_context);
 
