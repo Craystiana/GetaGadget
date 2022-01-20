@@ -132,6 +132,7 @@ namespace GetaGadget.BusinessLogic.Services
         public void PlaceOrder(int userId, PlaceOrderModel model)
         {
             var order = UnitOfWork.OrderRepository.Find(o => o.UserId == userId && o.OrderDate == null).FirstOrDefault();
+            var coupon = UnitOfWork.CouponRepository.Find(c => c.Code == model.Coupon).FirstOrDefault();
 
             order.County = model.County;
             order.City = model.City;
@@ -143,7 +144,41 @@ namespace GetaGadget.BusinessLogic.Services
             order.DeliveryMethodId = model.DeliveryMethodId;
             order.OrderDate = System.DateTime.Now;
 
+            if (coupon != null && order.TotalValue > coupon.MinOrderValue)
+            {
+                order.TotalValue -= order.TotalValue * coupon.Discount / 100;
+                order.CouponId = coupon.CouponId;
+            }
+
+            // add delivery cost
+            order.TotalValue += 20;
+
+            RemoveStockForOrder(order.OrderId);
+
             Save();
+        }
+
+        public void RemoveStockForOrder(int orderId)
+        {
+            var order = UnitOfWork.OrderRepository.GetOrderDetails(orderId);
+
+            foreach (var op in order.OrderProducts)
+            {
+                var product = UnitOfWork.ProductRepository.Get(op.ProductId);
+
+                product.Stock -= op.Quantity;
+            }
+
+            Save();
+        }
+
+        public IEnumerable<CouponModel> GetCoupons()
+        {
+            return UnitOfWork.CouponRepository.GetAll().Select(c => new CouponModel
+            {
+                Code = c.Code,
+                MinOrderValue = c.MinOrderValue
+            });
         }
 
     }

@@ -23,6 +23,7 @@ namespace GetaGadget.DataAccess
         private IWishlistRepository _wishlistRepository;
         private IOrderRepository _orderRepository;
         private IRepository<OrderProduct> _orderProductRepository;
+        private IRepository<Coupon> _couponRepository;
 
         public UnitOfWork(string connectionString)
         {
@@ -51,6 +52,7 @@ namespace GetaGadget.DataAccess
         public IOrderRepository OrderRepository => _orderRepository ??= new OrderRepository(_context);
 
         public IRepository<OrderProduct> OrderProductRepository => _orderProductRepository ??= new Repository<OrderProduct>(_context);
+        public IRepository<Coupon> CouponRepository => _couponRepository ??= new Repository<Coupon>(_context);
 
         protected virtual void Dispose(bool disposing)
         {

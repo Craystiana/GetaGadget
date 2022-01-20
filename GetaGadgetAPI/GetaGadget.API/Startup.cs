@@ -50,6 +50,7 @@ namespace GetaGadget.API
             services.AddScoped<IRepository<OrderProduct>, Repository<OrderProduct>>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IRepository<Coupon>, Repository<Coupon>>();
 
             // Services
             services.AddScoped<UserService>();

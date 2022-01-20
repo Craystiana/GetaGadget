@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { API_URL, PRODUCT_DATA_URL, PRODUCT_DETAIL_URL, PRODUCT_EDIT_URL, PRODUCT_DELETE_URL, PRODUCT_LIST_URL } from 'src/environments/environment';
+import { Coupon } from '../models/order/coupon';
 import { Product } from '../models/product/product';
 import { ProductData } from '../models/product/productData';
 import { ProductEdit } from '../models/product/productEdit';
@@ -57,6 +58,14 @@ export class ProductService {
   public getProductList(model: ProductQuery){
     return this.http.post(API_URL + PRODUCT_LIST_URL, model).pipe(
       map((result: Product[]) =>{
+        return result;
+      })
+    );
+  }
+
+  public getCoupons(){
+    return this.http.get(API_URL + "/product/GetCoupons").pipe(
+      map((result: Coupon[]) =>{
         return result;
       })
     );

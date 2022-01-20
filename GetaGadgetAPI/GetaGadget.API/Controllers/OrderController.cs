@@ -115,6 +115,22 @@ namespace GetaGadget.API.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Place")]
+        [GetaGadgetAuthorize]
+        public IActionResult GetCoupons()
+        {
+            try
+            {
+                return new JsonResult(_orderService.GetCoupons());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching coupons");
+                return StatusCode((int)HttpStatusCode.InternalServerError);
+            }
+        }
+
         private int? GetCurrentUserId()
         {
             var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();

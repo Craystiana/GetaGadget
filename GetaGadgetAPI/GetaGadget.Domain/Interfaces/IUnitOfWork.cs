@@ -16,6 +16,7 @@ namespace GetaGadget.Domain.Interfaces
         IWishlistRepository WishlistRepository { get; }
         IOrderRepository OrderRepository { get; }
         IRepository<OrderProduct> OrderProductRepository { get; }
+        IRepository<Coupon> CouponRepository { get; }
 
         int SaveChanges();
     }

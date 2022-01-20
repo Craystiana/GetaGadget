@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { first, take } from 'rxjs/operators';
+import { Coupon } from 'src/app/models/order/coupon';
 import { PlaceOrder } from 'src/app/models/order/placeOrder';
 import { ProductData } from 'src/app/models/product/productData';
 import { ProductService } from 'src/app/product/product.service';
@@ -17,6 +18,7 @@ export class PlacePage implements OnInit {
   private productData: ProductData;
   public isLoading: boolean;
   public deliveryMethod: number;
+  public coupons: Coupon[];
 
   constructor(private productService : ProductService, private orderService : OrderService, private router: Router, private toastCtrl: ToastController) { }
 
@@ -45,7 +47,8 @@ export class PlacePage implements OnInit {
                                orderForm.value.cardNumber,
                                orderForm.value.cardCsv,
                                orderForm.value.cardExpirationDate,
-                               this.deliveryMethod);
+                               this.deliveryMethod,
+                               orderForm.value.coupon);
 
     this.orderService.placeOrder(model).pipe(first()).subscribe(
       data => {

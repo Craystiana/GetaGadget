@@ -32,9 +32,12 @@ namespace GetaGadget.Domain.Entities
 
         public DateTime? OrderDate { get; set; }
 
+        public int? CouponId { get; set; }
+
         public virtual User User { get; set; }
         public virtual DeliveryMethod DeliveryMethod { get; set; }
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
+        public virtual Coupon Coupon { get; set; } 
 
     }
 }

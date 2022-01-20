@@ -7,6 +7,7 @@ export class PlaceOrder {
     public cardCsv: number;
     public cardExpirationDate: Date;
     public deliveryMethodId: number;
+    public coupon : string;
 
     public constructor(county: string,
                        city: string,
@@ -15,7 +16,8 @@ export class PlaceOrder {
                        cardNumber: string,
                        cardCsv: number,
                        cardExpirationDate: Date,
-                       deliveryMethodId: number) 
+                       deliveryMethodId: number,
+                       coupon: string) 
     {
         this.county = county;
         this.city = city;
@@ -25,5 +27,6 @@ export class PlaceOrder {
         this.cardCsv = cardCsv;
         this.cardExpirationDate = cardExpirationDate;
         this.deliveryMethodId = deliveryMethodId;
+        this.coupon = coupon;
     }
 }

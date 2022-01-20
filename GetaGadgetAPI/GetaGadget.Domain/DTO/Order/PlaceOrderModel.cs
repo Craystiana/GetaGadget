@@ -19,5 +19,7 @@ namespace GetaGadget.Domain.DTO.Order
         public DateTime? CardExpirationDate { get; set; }
 
         public int? DeliveryMethodId { get; set; }
+
+        public string Coupon { get; set; }
     }
 }
