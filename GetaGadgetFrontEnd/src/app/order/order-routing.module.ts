@@ -7,7 +7,16 @@ const routes: Routes = [
   {
     path: '',
     component: OrderPage
+  },
+  {
+    path: 'place',
+    loadChildren: () => import('./place/place.module').then( m => m.PlacePageModule)
+  },  {
+    path: 'history',
+    loadChildren: () => import('./history/history.module').then( m => m.HistoryPageModule)
   }
+
+
 ];
 
 @NgModule({

@@ -23,6 +23,10 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path: 'wishlist',
+    loadChildren: () => import('./wishlist/wishlist.module').then( m => m.WishlistPageModule)
+  },
+  {
     path: "**",
     redirectTo: 'product'
   }

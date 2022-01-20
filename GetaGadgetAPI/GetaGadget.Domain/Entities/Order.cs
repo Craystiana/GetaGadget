@@ -12,6 +12,14 @@ namespace GetaGadget.Domain.Entities
         [Required]
         public int UserId { get; set; }
 
+        public string County { get; set; }
+
+        public string City { get; set; }
+
+        public string FullAddress { get; set; }
+
+        public string PostalCode { get; set; }
+
         public string CardNumber { get; set; }
 
         public int? CardCsv { get; set; }

@@ -3,20 +3,33 @@
     <ion-grid class="ion-no-padding">
       <ion-row>
         <ion-col size-lg="2">
-          <ion-title style="height: 100%;">Cart</ion-title>
+          <ion-title style="height: 100%;">Order History</ion-title>
         </ion-col>
       </ion-row>
     </ion-grid>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
+    <ion-button *ngIf="currentOrder != undefined" slot="start" (click)="initData()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid *ngIf="order != undefined">
-    <ion-row style="justify-content: center" *ngIf="order !== undefined">
-      <ion-col size-lg="3" *ngFor="let product of order.products">
+  <ion-col *ngIf="history != undefined">
+    <ion-card  mode="ios" *ngFor="let order of history" (click)="setOrder(order)">
+      <ion-card-header mode="ios" class="ion-text-center">
+        <ion-card-title>Order: {{order.orderId}}</ion-card-title>
+        <ion-card-subtitle>Date: {{order.orderDate}}</ion-card-subtitle>
+        <ion-card-subtitle>Total Value: {{order.totalValue}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </ion-col>
+
+  <ion-grid>
+    <ion-row style="justify-content: center" *ngIf="currentOrder !== undefined">
+      <ion-col size-lg="3" *ngFor="let product of currentOrder.products">
         <ion-card [routerLink]="['/product/detail']" [queryParams]="{productId : product.productId}">
           <img [src]="product.photo !== null ?
            'data:image/jpg;base64,' + product.photo :
@@ -35,32 +48,11 @@
               <ion-icon name="bag-outline" slot="start" color="success"></ion-icon> 
               <ion-label>Quantity: {{product.quantity}}</ion-label>
             </ion-item>
-            <ion-button slot="end" color="warning" shape="round" title="Delete" (click)="removeFromCart(product.productId)">
-              <ion-icon name="remove-circle-outline"></ion-icon>
-            </ion-button>
-            <ion-button slot="end" color="success" shape="round" title="Add" (click)="addToCart(product.productId)">
-              <ion-icon name="add-circle-outline"></ion-icon>
-            </ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col offset="5">
-        <ion-button  *ngIf="order !== undefined" class="ion-text-center" [routerLink]="['/order/place']">
-          <ion-icon name="cash-outline" slot="start"></ion-icon>Place order for {{order.totalValue}} RON</ion-button> 
-      </ion-col>
     </ion-row>
   </ion-grid> 
-  <ion-grid *ngIf="order == undefined">
-    <ion-row>
-      <ion-col offset="5" size="2">
-        <ion-item class="ion-text-center">
-          <ion-icon name="cash-outline" color="danger" slot="start"></ion-icon>
-          <ion-label>Your cart is empty!</ion-label>
-          <ion-icon name="cash-outline" color="danger" slot="end"></ion-icon>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
 </ion-content>

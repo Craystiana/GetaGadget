@@ -5,6 +5,7 @@ import { first, take } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Product } from 'src/app/models/product/product';
 import { OrderService } from 'src/app/order/order.service';
+import { WishlistService } from 'src/app/wishlist/wishlist.service';
 import { ProductService } from '../product.service';
 
 @Component({
@@ -22,6 +23,7 @@ export class DetailPage implements OnInit {
               private loadingController: LoadingController, 
               private productService : ProductService,
               private orderService : OrderService, 
+              private wishlistService : WishlistService,
               private router: Router, 
               private toastCtrl : ToastController,
               private authService : AuthService) { }
@@ -106,6 +108,28 @@ export class DetailPage implements OnInit {
       () => {
         this.toastCtrl.create({
           message: 'Unable to add product to cart',
+          duration: 5000,
+          position: 'bottom',
+          color: 'danger',
+          buttons: ['Dismiss']
+        }).then((el) => el.present());
+    });
+  }
+
+  addToWishlist(productId){
+    this.wishlistService.addProduct(productId).pipe(first()).subscribe(
+      () => {
+        this.toastCtrl.create({
+          message: 'Product added to wishlist',
+          duration: 5000,
+          position: 'bottom',
+          color: 'success',
+          buttons: ['Dismiss']
+        }).then((el) => el.present());
+      },
+      () => {
+        this.toastCtrl.create({
+          message: 'Unable to add product to wishlist',
           duration: 5000,
           position: 'bottom',
           color: 'danger',

@@ -1,9 +1,6 @@
-﻿using GetaGadget.Common.Enums;
-using GetaGadget.Domain.Entities;
+﻿using GetaGadget.Domain.Entities;
 using GetaGadget.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace GetaGadget.DataAccess.Repositories

@@ -82,4 +82,11 @@ export class ProductPage implements OnInit {
     this.router.navigateByUrl("/product/edit");
   }
 
+  viewCart() {
+    this.router.navigateByUrl("/order");
+  }
+
+  viewWishlist() {
+    this.router.navigateByUrl("/wishlist");
+  }
 }

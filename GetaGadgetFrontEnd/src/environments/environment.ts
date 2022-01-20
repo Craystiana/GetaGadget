@@ -17,7 +17,11 @@ export const PRODUCT_LIST_URL = '/product/list';
 export const ORDER_INDEX_URL = '/order';
 export const ORDER_ADD_URL = '/order/add';
 export const ORDER_DELETE_URL = '/order/delete';
-export const ORDER_HISTORY_URL = '/order/history'
+export const ORDER_HISTORY_URL = '/order/history';
+export const ORDER_PLACE_URL = '/order/place';
+export const WISHLIST_INDEX_URL = '/wishlist';
+export const WISHLIST_ADD_URL = '/wishlist/add';
+export const WISHLIST_DELETE_URL = '/wishlist/delete';
 
 /*
  * For easier debugging in development mode, you can import the following file

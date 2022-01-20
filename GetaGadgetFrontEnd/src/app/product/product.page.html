@@ -25,6 +25,12 @@
       <ion-button *ngIf="authService.isAdmin()" slot="end" color="dark" shape="round" title="Add Product" (click)="addPage()">
         <ion-icon name="add-circle-outline"></ion-icon>
       </ion-button>
+      <ion-button slot="end" color="dark" shape="round" title="Cart" (click)="viewCart()">
+        <ion-icon name="cart-outline"></ion-icon>
+      </ion-button>
+      <ion-button slot="end" color="dark" shape="round" title="Wishlist" (click)="viewWishlist()">
+        <ion-icon name="heart-outline"></ion-icon>
+      </ion-button>
   
   
     </ion-toolbar>

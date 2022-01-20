@@ -1,8 +1,6 @@
 ﻿using GetaGadget.API.Authorization;
 using GetaGadget.BusinessLogic.Services;
 using GetaGadget.Common.Enums;
-using GetaGadget.Domain.DTO.Order;
-using GetaGadget.Domain.DTO.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,14 +11,14 @@ namespace GetaGadget.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class OrderController : ControllerBase
+    public class WishlistController : ControllerBase
     {
-        private readonly OrderService _orderService;
+        private readonly WishlistService _wishlistService;
         private readonly ILogger<UserController> _logger;
 
-        public OrderController(OrderService orderService, ILogger<UserController> logger)
+        public WishlistController(WishlistService wishlistService, ILogger<UserController> logger)
         {
-            _orderService = orderService;
+            _wishlistService = wishlistService;
             _logger = logger;
         }
 
@@ -32,9 +30,9 @@ namespace GetaGadget.API.Controllers
             {
                 var userId = (int) GetCurrentUserId();
 
-                var orderModel = _orderService.GetCurrentOrder(userId);
+                var wishlistProductModel = _wishlistService.GetUserWishlist(userId);
 
-                return new JsonResult(orderModel);
+                return new JsonResult(wishlistProductModel);
             }
             catch (Exception ex)
             {
@@ -50,7 +48,7 @@ namespace GetaGadget.API.Controllers
         {
             try
             {
-                _orderService.AddProductToOrder((int)GetCurrentUserId(), productId);
+                _wishlistService.AddProductToWishlist((int)GetCurrentUserId(), productId);
 
                 return new JsonResult(true);
             }
@@ -68,7 +66,7 @@ namespace GetaGadget.API.Controllers
         {
                 try
                 {
-                    _orderService.RemoveProductFromOrder((int)GetCurrentUserId(), productId);
+                    _wishlistService.RemoveProductFromWishlist((int)GetCurrentUserId(), productId);
 
                     return new JsonResult(true);
                 }
@@ -77,42 +75,6 @@ namespace GetaGadget.API.Controllers
                     _logger.LogError(ex, "Error removing product from order");
                     return StatusCode((int)HttpStatusCode.InternalServerError);
                 }
-        }
-
-        [HttpGet]
-        [Route("History")]
-        [GetaGadgetAuthorize]
-        public IActionResult History()
-        {
-            try
-            {
-                var userId = (int)GetCurrentUserId();
-
-                return new JsonResult(_orderService.GetHistory(userId));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error fetching order history");
-                return StatusCode((int)HttpStatusCode.InternalServerError);
-            }
-        }
-
-        [HttpPost]
-        [Route("Place")]
-        [GetaGadgetAuthorize]
-        public IActionResult PlaceOrder([FromBody] PlaceOrderModel model)
-        {
-            try
-            {
-                _orderService.PlaceOrder((int)GetCurrentUserId(), model);
-
-                return new JsonResult(true);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error fetching order history");
-                return StatusCode((int)HttpStatusCode.InternalServerError);
-            }
         }
 
         private int? GetCurrentUserId()

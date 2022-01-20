@@ -2,7 +2,7 @@ import { OrderProduct } from "./orderProduct";
 
 export class Order {
     public orderId: number;
-    public OrderDate : Date;
+    public orderDate : Date;
     public totalValue : number;
-    public Products : OrderProduct[];
+    public products : OrderProduct[];
 }

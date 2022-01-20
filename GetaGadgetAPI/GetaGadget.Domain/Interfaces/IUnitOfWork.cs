@@ -13,7 +13,7 @@ namespace GetaGadget.Domain.Interfaces
         IRepository<Provider> ProviderRepository { get; }
         IRepository<DeliveryMethod> DeliveryMethodRepository { get; }
         IRepository<Category> CategoryRepository { get; }
-        IRepository<Wishlist> WishlistRepository { get; }
+        IWishlistRepository WishlistRepository { get; }
         IOrderRepository OrderRepository { get; }
         IRepository<OrderProduct> OrderProductRepository { get; }
 

@@ -20,7 +20,7 @@ namespace GetaGadget.DataAccess
         private IRepository<Provider> _providerRepository;
         private IRepository<DeliveryMethod> _deliveryMethodRepository;
         private IRepository<Category> _categoryRepository;
-        private IRepository<Wishlist> _wishlistRepository;
+        private IWishlistRepository _wishlistRepository;
         private IOrderRepository _orderRepository;
         private IRepository<OrderProduct> _orderProductRepository;
 
@@ -46,7 +46,7 @@ namespace GetaGadget.DataAccess
 
         public IRepository<Category> CategoryRepository => _categoryRepository ??= new Repository<Category>(_context);
 
-        public IRepository<Wishlist> WishlistRepository => _wishlistRepository ??= new Repository<Wishlist>(_context);
+        public IWishlistRepository WishlistRepository => _wishlistRepository ??= new WishlistRepository(_context);
 
         public IOrderRepository OrderRepository => _orderRepository ??= new OrderRepository(_context);
 

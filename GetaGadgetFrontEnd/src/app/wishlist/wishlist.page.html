@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size-lg="2">
+          <ion-title style="height: 100%;">Wishlist</ion-title>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row style="justify-content: center" *ngIf="wishlist !== undefined">
+      <ion-col size-lg="3" *ngFor="let product of wishlist">
+        <ion-card [routerLink]="['/product/detail']" [queryParams]="{productId : product.productId}">
+          <img [src]="product.productPhoto !== null ?
+           'data:image/jpg;base64,' + product.productPhoto :
+           'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'"
+          style="width: 100%; height: 200px;"/>
+          <ion-card-header class="ion-text-center">
+            <ion-card-title>{{product.productName}}</ion-card-title>
+          </ion-card-header>
+      
+          <ion-card-content>
+            <ion-item lines="none">
+              <ion-icon name="cash-outline" slot="start" color="success"></ion-icon> 
+              <ion-label>{{product.productPrice}} RON</ion-label>
+            </ion-item>
+            <ion-button slot="end" color="danger" shape="round" title="Delete" (click)="removeFromWishlist(product.productId)">
+              <ion-icon name="close-circle-outline"></ion-icon>
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

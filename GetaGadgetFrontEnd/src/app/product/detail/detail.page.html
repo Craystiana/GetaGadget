@@ -62,8 +62,10 @@
               <ion-label>Price: {{product.price}} RON</ion-label>
             </ion-item>
             <ion-button class="ion-text-center" (click)="addToCart(product.productId)">
-              <ion-icon name="bag-add-outline" slot="start"></ion-icon>
-              Add to cart
+              <ion-icon name="cart-outline"></ion-icon>
+            </ion-button>
+            <ion-button class="ion-text-center" (click)="addToWishlist(product.productId)">
+              <ion-icon name="heart-outline"></ion-icon>
             </ion-button>
           </ion-card-content>
         </ion-card>

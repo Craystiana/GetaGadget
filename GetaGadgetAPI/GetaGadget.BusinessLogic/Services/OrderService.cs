@@ -1,9 +1,6 @@
-﻿using GetaGadget.Domain.DTO.Generic;
-using GetaGadget.Domain.DTO.Order;
-using GetaGadget.Domain.DTO.Product;
+﻿using GetaGadget.Domain.DTO.Order;
 using GetaGadget.Domain.Entities;
 using GetaGadget.Domain.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,7 +8,11 @@ namespace GetaGadget.BusinessLogic.Services
 {
     public class OrderService : BaseService
     {
-        public OrderService(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+        private readonly ProductService _productService;
+
+        public OrderService(IUnitOfWork unitOfWork, ProductService productService) : base(unitOfWork) {
+            this._productService = productService;
+        }
 
         public bool OrderBelongsToUser(int userId, int orderId)
         {
@@ -72,7 +73,7 @@ namespace GetaGadget.BusinessLogic.Services
 
             if (order != null)
             {
-                var orderProduct = order.OrderProducts.First(op => op.ProductId == productId);
+                var orderProduct = UnitOfWork.OrderProductRepository.Find(op => op.OrderId == order.OrderId && op.ProductId == productId).FirstOrDefault();
 
                 orderProduct.Quantity -= 1;
 
@@ -120,10 +121,29 @@ namespace GetaGadget.BusinessLogic.Services
                 Products = order.OrderProducts.Select(op => new OrderProductModel
                 {
                     ProductId = op.ProductId,
+                    ProductName = op.Product.Name,
+                    Photo = _productService.ConvertToBase64String(op.Product.Photo),
                     Quantity = op.Quantity,
                     Price = op.Product.Price
                 })
             };
+        }
+
+        public void PlaceOrder(int userId, PlaceOrderModel model)
+        {
+            var order = UnitOfWork.OrderRepository.Find(o => o.UserId == userId && o.OrderDate == null).FirstOrDefault();
+
+            order.County = model.County;
+            order.City = model.City;
+            order.FullAddress = model.FullAddress;
+            order.PostalCode = model.PostalCode;
+            order.CardNumber = model.CardNumber;
+            order.CardCsv = model.CardCsv;
+            order.CardExpirationDate = model.CardExpirationDate;
+            order.DeliveryMethodId = model.DeliveryMethodId;
+            order.OrderDate = System.DateTime.Now;
+
+            Save();
         }
 
     }
