@@ -116,7 +116,7 @@ namespace GetaGadget.API.Controllers
         }
 
         [HttpGet]
-        [Route("Place")]
+        [Route("GetCoupons")]
         [GetaGadgetAuthorize]
         public IActionResult GetCoupons()
         {

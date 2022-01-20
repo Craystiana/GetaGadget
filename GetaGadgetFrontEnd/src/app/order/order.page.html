@@ -17,12 +17,12 @@
   <ion-grid *ngIf="order != undefined">
     <ion-row style="justify-content: center" *ngIf="order !== undefined">
       <ion-col size-lg="3" *ngFor="let product of order.products">
-        <ion-card [routerLink]="['/product/detail']" [queryParams]="{productId : product.productId}">
+        <ion-card>
           <img [src]="product.photo !== null ?
            'data:image/jpg;base64,' + product.photo :
            'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'"
           style="width: 100%; height: 200px;"/>
-          <ion-card-header class="ion-text-center">
+          <ion-card-header class="ion-text-center" [routerLink]="['/product/detail']" [queryParams]="{productId : product.productId}">
             <ion-card-title>{{product.productName}}</ion-card-title>
           </ion-card-header>
       

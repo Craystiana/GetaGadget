@@ -26,29 +26,28 @@ export class OrderPage implements OnInit {
   initData(){
     this.orderService.getOrder().pipe(take(1)).subscribe(data =>{
       this.order = data;
+      this.productService.getCoupons().pipe(take(1)).subscribe(
+        data => {
+          this.coupons = data;
+          var valid = null;
+          for (var coupon of this.coupons) {
+            if (this.order.totalValue > coupon.minOrderValue){
+              valid = coupon;
+            }
+          }
+        
+          if (valid != null){
+            this.toastCtrl.create({
+              message: 'Use code ' + valid.code + ' to get a discount',
+              position: 'top',
+              color: 'success',
+              duration: 5000,
+              buttons: ['I\'m rich', 'I\'ll remember']
+            }).then((el) => el.present())
+          }
+        }
+      );
     });
-
-    this.productService.getCoupons().pipe(take(1)).subscribe(
-      data => {
-        this.coupons = data;
-      }
-    );
-
-    var valid = null;
-    for (var coupon of this.coupons) {
-      if (this.order.totalValue > coupon.minOrderValue){
-        valid = coupon;
-      }
-    }
-
-    if (valid != null){
-      this.toastCtrl.create({
-        message: 'Use code ' + valid.code + ' to get a discount',
-        position: 'top',
-        color: 'success',
-        buttons: ['I\'m rich', 'I\'ll remember']
-      }).then((el) => el.present())
-    }
   }
 
   addToCart(productId){

@@ -1,6 +1,7 @@
 ﻿using GetaGadget.Domain.DTO.Order;
 using GetaGadget.Domain.Entities;
 using GetaGadget.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -74,8 +75,10 @@ namespace GetaGadget.BusinessLogic.Services
             if (order != null)
             {
                 var orderProduct = UnitOfWork.OrderProductRepository.Find(op => op.OrderId == order.OrderId && op.ProductId == productId).FirstOrDefault();
+                var product = UnitOfWork.ProductRepository.Get(productId);
 
                 orderProduct.Quantity -= 1;
+                order.TotalValue -= product.Price;
 
                 if (orderProduct.Quantity <= 0)
                 {
@@ -102,11 +105,34 @@ namespace GetaGadget.BusinessLogic.Services
             }
         }
 
-        public IEnumerable<OrderModel> GetHistory(int userId)
+        public IEnumerable<OrderHistoryModel> GetHistory(int userId)
         {
             var orders = UnitOfWork.OrderRepository.Find(o => o.UserId == userId && o.OrderDate.HasValue);
 
-            return orders.Select(o => GetOrderModel(o.OrderId));
+            return orders.Select(o => GetOrderModelHistory(o.OrderId));
+        }
+
+        public OrderHistoryModel GetOrderModelHistory(int orderId)
+        {
+            var order = UnitOfWork.OrderRepository.GetOrderDetails(orderId);
+
+            return new OrderHistoryModel
+            {
+                OrderId = order.OrderId,
+                OrderDate = order.OrderDate != null ? ((DateTime)order.OrderDate).ToString("dd MMMM yyyy") : null,
+                Address = "County: " + order.County + ", City: " + order.City + ", Postal Code: " + order.PostalCode + ", Details: " + order.FullAddress,
+                CardDetails = "Number: " + order.CardNumber + ", CSV: " + order.CardCsv + ", Expiration Date: " + ((DateTime)order.CardExpirationDate).ToString("MMMM yyyy"),
+                DeliveryMethod = order.DeliveryMethod != null ? order.DeliveryMethod.Name : null,
+                TotalValue = order.TotalValue,
+                Products = order.OrderProducts.Select(op => new OrderProductModel
+                {
+                    ProductId = op.ProductId,
+                    ProductName = op.Product.Name,
+                    Photo = _productService.ConvertToBase64String(op.Product.Photo),
+                    Quantity = op.Quantity,
+                    Price = op.Product.Price
+                })
+            };
         }
 
         public OrderModel GetOrderModel(int orderId)
@@ -116,7 +142,7 @@ namespace GetaGadget.BusinessLogic.Services
             return new OrderModel
             {
                 OrderId = order.OrderId,
-                OrderDate = order.OrderDate,
+                OrderDate = order.OrderDate != null ? ((DateTime)order.OrderDate).ToString("dd MMMM yyyy") : null,
                 TotalValue = order.TotalValue,
                 Products = order.OrderProducts.Select(op => new OrderProductModel
                 {

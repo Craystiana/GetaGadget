@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { Order } from 'src/app/models/order/order';
+import { OrderHistory } from 'src/app/models/order/orderHistory';
 import { OrderService } from '../order.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { OrderService } from '../order.service';
   styleUrls: ['./history.page.scss'],
 })
 export class HistoryPage implements OnInit {
-  private history : Order[];
+  private history : OrderHistory[];
   private currentOrder: Order;
 
   constructor(private orderService : OrderService) { }

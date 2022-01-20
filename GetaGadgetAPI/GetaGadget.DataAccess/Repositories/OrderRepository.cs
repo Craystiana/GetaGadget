@@ -17,7 +17,8 @@ namespace GetaGadget.DataAccess.Repositories
 
         public Order GetOrderDetails(int orderId)
         {
-            return _context.Orders.Include(o => o.OrderProducts)
+            return _context.Orders.Include(o => o.DeliveryMethod)
+                                  .Include(o => o.OrderProducts)
                                   .ThenInclude(op => op.Product)
                                   .FirstOrDefault(o => o.OrderId == orderId);
         }

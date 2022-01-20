@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { API_URL, ORDER_ADD_URL, ORDER_DELETE_URL, ORDER_HISTORY_URL, ORDER_INDEX_URL, ORDER_PLACE_URL } from 'src/environments/environment';
 import { Order } from '../models/order/order';
+import { OrderHistory } from '../models/order/orderHistory';
 import { PlaceOrder } from '../models/order/placeOrder';
 
 @Injectable({
@@ -38,7 +39,7 @@ export class OrderService {
 
   public getOrderHistory(){
     return this.http.get(API_URL + ORDER_HISTORY_URL).pipe(
-      map((data : Order[]) => {
+      map((data : OrderHistory[]) => {
         return data;
       })
     )

@@ -7,7 +7,7 @@ namespace GetaGadget.Domain.DTO.Order
     {
         public int OrderId { get; set; } 
 
-        public DateTime? OrderDate { get; set; }
+        public string OrderDate { get; set; }
 
         public float TotalValue { get; set; }
 

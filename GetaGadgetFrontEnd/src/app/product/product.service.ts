@@ -64,7 +64,7 @@ export class ProductService {
   }
 
   public getCoupons(){
-    return this.http.get(API_URL + "/product/GetCoupons").pipe(
+    return this.http.get(API_URL + "/order/GetCoupons").pipe(
       map((result: Coupon[]) =>{
         return result;
       })

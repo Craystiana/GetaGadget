@@ -9,20 +9,23 @@
     </ion-grid>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
+      <ion-button *ngIf="currentOrder != undefined" slot="start" (click)="initData()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-button *ngIf="currentOrder != undefined" slot="start" (click)="initData()">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-col *ngIf="history != undefined">
-    <ion-card  mode="ios" *ngFor="let order of history" (click)="setOrder(order)">
-      <ion-card-header mode="ios" class="ion-text-center">
+    <ion-card *ngFor="let order of history" (click)="setOrder(order)">
+      <ion-card-header class="ion-text-center">
         <ion-card-title>Order: {{order.orderId}}</ion-card-title>
         <ion-card-subtitle>Date: {{order.orderDate}}</ion-card-subtitle>
-        <ion-card-subtitle>Total Value: {{order.totalValue}}</ion-card-subtitle>
+        <ion-card-subtitle>Total Value: {{order.totalValue}} RON</ion-card-subtitle>
+        <ion-card-subtitle>Address: {{order.address}}</ion-card-subtitle>
+        <ion-card-subtitle>Card Details: {{order.cardDetails}}</ion-card-subtitle>
+        <ion-card-subtitle *ngIf="order.deliveryMethod != undefined">Delivery Method: {{order.deliveryMethod}}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
   </ion-col>
