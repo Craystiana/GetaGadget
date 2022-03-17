@@ -61,7 +61,9 @@ export class RegisterPage implements OnInit {
         this.isLoading = false;
       }
     )
-
   }
 
+  public about(url){
+    window.open(url);
+  }
 }

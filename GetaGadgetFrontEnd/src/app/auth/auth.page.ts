@@ -57,4 +57,8 @@ export class AuthPage implements OnInit {
       );
     }    
   }
+
+  public about(url){
+    window.open(url);
+  }
 }

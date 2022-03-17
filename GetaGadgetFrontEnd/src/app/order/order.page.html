@@ -33,13 +33,12 @@
             </ion-item>
             <ion-item lines="none">
               <ion-icon name="bag-outline" slot="start" color="success"></ion-icon> 
-              <ion-label>Quantity: {{product.quantity}}</ion-label>
+              <ion-label>
+                <ion-input type="number" placeholder={{product.quantity}} debounce="500" ngModel #quantityCtrl="ngModel" (ionChange)="changeProductQuantity(product.productId, quantityCtrl.value)">Quantity</ion-input>
+              </ion-label>
             </ion-item>
-            <ion-button slot="end" color="warning" shape="round" title="Delete" (click)="removeFromCart(product.productId)">
+            <ion-button slot="end" color="danger" shape="round" title="Delete" (click)="removeFromCart(product.productId)">
               <ion-icon name="remove-circle-outline"></ion-icon>
-            </ion-button>
-            <ion-button slot="end" color="success" shape="round" title="Add" (click)="addToCart(product.productId)">
-              <ion-icon name="add-circle-outline"></ion-icon>
             </ion-button>
           </ion-card-content>
         </ion-card>
@@ -64,3 +63,27 @@
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary" style="height: 50px">
+    <ion-grid>
+      <ion-row class="ion-justify-content-evenly">
+        <ion-col offset="0" size="2">
+          <ion-item (click)="about('https://www.facebook.com')" lines="none" color="transparent" button>
+            <ion-icon name="logo-facebook"></ion-icon>
+          </ion-item>
+        </ion-col>
+        <ion-col offset="2" size="2">
+          <ion-item (click)="about('https://www.instagram.com')" lines="none" color="transparent" button>
+            <ion-icon name="logo-instagram"></ion-icon>
+          </ion-item>
+        </ion-col>
+        <ion-col offset="1" size="1">
+          <ion-item (click)="about('https://www.twitter.com')" lines="none" color="transparent" button>
+            <ion-icon name="logo-twitter"></ion-icon>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

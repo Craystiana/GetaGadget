@@ -3,7 +3,7 @@
     <ion-grid class="ion-no-padding">
       <ion-row>
         <ion-col size-lg="2">
-          <ion-title style="height: 100%;">Wishlist</ion-title>
+          <ion-title style="height: 100%;">Contact Us!</ion-title>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -14,25 +14,31 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row style="justify-content: center" *ngIf="wishlist !== undefined">
-      <ion-col size-lg="3" *ngFor="let product of wishlist">
+  <ion-grid style="height: inherit;">
+    <ion-row class="ion-align-items-center" style="height: 100%;">
+      <ion-col offset-sm="3" size-sm="6">
         <ion-card>
-          <img [src]="product.productPhoto !== null ?
-           'data:image/jpg;base64,' + product.productPhoto :
-           'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'"
-          style="width: 100%; height: 200px;"/>
-          <ion-card-header class="ion-text-center" [routerLink]="['/product/detail']" [queryParams]="{productId : product.productId}">
-            <ion-card-title>{{product.productName}}</ion-card-title>
+          <ion-card-header class="ion-text-center">
+            <ion-card-title>
+              <ion-icon name="flash-sharp" color="warning"></ion-icon>
+              Send us your feedback
+              <ion-icon name="flash-sharp" color="warning"></ion-icon>
+            </ion-card-title>
           </ion-card-header>
-      
+
           <ion-card-content>
-            <ion-item lines="none">
-              <ion-icon name="cash-outline" slot="start" color="success"></ion-icon> 
-              <ion-label>{{product.productPrice}} RON</ion-label>
+            <ion-item>
+              <ion-label position="floating">Subject</ion-label>
+              <ion-input [(ngModel)]="subject"></ion-input>
             </ion-item>
-            <ion-button slot="end" color="danger" shape="round" title="Delete" (click)="removeFromWishlist(product.productId)">
-              <ion-icon name="close-circle-outline"></ion-icon>
+            <ion-item>
+              <ion-label position="floating">Your message</ion-label>
+              <ion-textarea autoGrow [(ngModel)]="message"></ion-textarea>
+            </ion-item>
+            <ion-button (click)="sendMail()" [disabled]="message.length == 0 || subject.length == 0">
+              <ion-label>
+                Send
+              </ion-label>
             </ion-button>
           </ion-card-content>
         </ion-card>

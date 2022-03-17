@@ -89,4 +89,8 @@ export class ProductPage implements OnInit {
   viewWishlist() {
     this.router.navigateByUrl("/wishlist");
   }
+
+  public about(url){
+    window.open(url);
+  }
 }

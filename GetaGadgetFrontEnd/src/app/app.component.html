@@ -3,8 +3,8 @@
     <ion-content>
       <ion-list id="inbox-list">
         <ion-list-header>
-            <ion-label>{{name()}}</ion-label>
-            <ion-badge *ngIf="isAdmin()">Admin</ion-badge>
+          <ion-label>{{name()}}</ion-label>
+          <ion-badge *ngIf="isAdmin()">Admin</ion-badge>
         </ion-list-header>
         <ion-note>{{email()}}</ion-note>
 
@@ -14,25 +14,33 @@
             <ion-label>{{ p.title }}</ion-label>
           </ion-item>
         </ion-menu-toggle> -->
-        <ion-item lines="none" (click)="onNavigate('/product')" button>
-          <ion-label>Products</ion-label>
-          <ion-icon name="storefront-outline" slot="start"></ion-icon>
-        </ion-item>
-        <ion-item lines="none" (click)="onNavigate('/order')" button>
-          <ion-label>Cart</ion-label>
-          <ion-icon name="cart-outline" slot="start"></ion-icon>
-        </ion-item>
-        <ion-item lines="none" (click)="onNavigate('/order/history')" button>
-          <ion-label>Order History</ion-label>
-          <ion-icon name="reader-outline" slot="start"></ion-icon>
-        </ion-item>
-        <ion-item lines="none" (click)="onLogout()" button>
-          <ion-label>Logout</ion-label>
-          <ion-icon name="log-out-outline" slot="start"></ion-icon>
-        </ion-item>
-
+        <ion-menu-toggle>
+          <ion-item lines="none" (click)="onNavigate('/product')" button>
+            <ion-label>Products</ion-label>
+            <ion-icon name="storefront-outline" slot="start"></ion-icon>
+          </ion-item>
+          <ion-item lines="none" (click)="onNavigate('/order')" button>
+            <ion-label>Cart</ion-label>
+            <ion-icon name="cart-outline" slot="start"></ion-icon>
+          </ion-item>
+          <ion-item lines="none" (click)="onNavigate('/order/history')" button>
+            <ion-label>Order History</ion-label>
+            <ion-icon name="reader-outline" slot="start"></ion-icon>
+          </ion-item>
+          <ion-item lines="none" (click)="onNavigate('/contact')" button>
+            <ion-label>Contact</ion-label>
+            <ion-icon name="people-circle-outline" slot="start"></ion-icon>
+          </ion-item>
+          <ion-item lines="none" (click)="onNavigate('/geolocation')" button>
+            <ion-label>Romania Geolocation</ion-label>
+            <ion-icon name="map-outline" slot="start"></ion-icon>
+          </ion-item>
+          <ion-item lines="none" (click)="onLogout()" button>
+            <ion-label>Logout</ion-label>
+            <ion-icon name="log-out-outline" slot="start"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
       </ion-list>
-
     </ion-content>
   </ion-menu>
 

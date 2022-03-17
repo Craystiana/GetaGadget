@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size-lg="2">
+          <ion-title style="height: 100%;">Romania Geolocation</ion-title>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2841984.9622639343!2d22.777488951624605!3d45.92378556716859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff26958976c3%3A0x84ef4f92a804b194!2sRomania!5e0!3m2!1sen!2sro!4v1647175608744!5m2!1sen!2sro" style="width: 100%; height: 99%; background-color: transparent; padding: 1rem;" allowfullscreen loading="lazy"></iframe>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary" style="height: 50px">
+    <ion-grid>
+      <ion-row class="ion-justify-content-evenly">
+        <ion-col offset="0" size="2">
+          <ion-item (click)="about('https://www.facebook.com')" lines="none" color="transparent" button>
+            <ion-icon name="logo-facebook"></ion-icon>
+          </ion-item>
+        </ion-col>
+        <ion-col offset="2" size="2">
+          <ion-item (click)="about('https://www.instagram.com')" lines="none" color="transparent" button>
+            <ion-icon name="logo-instagram"></ion-icon>
+          </ion-item>
+        </ion-col>
+        <ion-col offset="1" size="1">
+          <ion-item (click)="about('https://www.twitter.com')" lines="none" color="transparent" button>
+            <ion-icon name="logo-twitter"></ion-icon>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

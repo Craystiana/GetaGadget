@@ -46,6 +46,34 @@ namespace GetaGadget.BusinessLogic.Services
             return order;
         }
 
+        public Order ChangeProductQuantity(int userId, int productId, int quantity)
+        {
+            var order = UnitOfWork.OrderRepository.GetCurrentOrder(userId);
+
+            if (order != null)
+            {
+                var orderProduct = UnitOfWork.OrderProductRepository.Find(op => op.OrderId == order.OrderId && op.ProductId == productId).FirstOrDefault();
+                var product = UnitOfWork.ProductRepository.Get(productId);
+
+                order.TotalValue += (quantity - orderProduct.Quantity) * product.Price;
+                orderProduct.Quantity = quantity;
+
+                if (orderProduct.Quantity <= 0)
+                {
+                    order.OrderProducts.Remove(orderProduct);
+                }
+
+                if (order.OrderProducts.Count == 0)
+                {
+                    UnitOfWork.OrderRepository.Remove(order);
+                }
+            }
+
+            Save();
+
+            return order;
+        }
+
         public Order AddProductToOrder(int userId, int productId)
         {
             // Get order that does not have a date yet
@@ -70,19 +98,19 @@ namespace GetaGadget.BusinessLogic.Services
         
         public Order RemoveProductFromOrder(int userId, int productId)
         {
-            var order = UnitOfWork.OrderRepository.Find(o => o.UserId == userId && o.OrderDate == null).FirstOrDefault();
+            var order = UnitOfWork.OrderRepository.GetCurrentOrder(userId);
 
             if (order != null)
             {
                 var orderProduct = UnitOfWork.OrderProductRepository.Find(op => op.OrderId == order.OrderId && op.ProductId == productId).FirstOrDefault();
                 var product = UnitOfWork.ProductRepository.Get(productId);
 
-                orderProduct.Quantity -= 1;
-                order.TotalValue -= product.Price;
+                order.TotalValue -= product.Price * orderProduct.Quantity;
+                order.OrderProducts.Remove(orderProduct);
 
-                if (orderProduct.Quantity <= 0)
+                if (order.OrderProducts.Count == 0)
                 {
-                    order.OrderProducts.Remove(orderProduct);
+                    UnitOfWork.OrderRepository.Remove(order);
                 }
             }
 

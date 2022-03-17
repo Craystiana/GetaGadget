@@ -137,4 +137,8 @@ export class DetailPage implements OnInit {
         }).then((el) => el.present());
     });
   }
+
+  public about(url){
+    window.open(url);
+  }
 }

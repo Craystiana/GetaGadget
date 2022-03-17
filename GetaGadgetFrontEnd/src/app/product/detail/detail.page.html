@@ -23,10 +23,34 @@
     <ion-row>
       <ion-col size-lg="6" offset-lg="3">
         <ion-card *ngIf="this.product !== undefined">
-          <img [src]="product.photo !== null ?
-               'data:image/jpg;base64,' + product.photo :
-               'https://image.freepik.com/free-vector/laptop-tablet-desktop-mobile_1284-3389.jpg'"
-               style="width: 100%; max-height: 500px;"/>
+          <ion-slides>
+            <ion-slide>
+              <img [src]="product.photo !== null ?
+                  'data:image/jpg;base64,' + product.photo :
+                  'https://image.freepik.com/free-vector/laptop-tablet-desktop-mobile_1284-3389.jpg'"
+                  style="width: 100%; max-height: 500px;"/>
+            </ion-slide>
+            <ion-slide>
+              <img [src]="product.category == 'Phone' ?
+                  'https://cdn.pocket-lint.com/r/s/970x/assets/images/124434-phones-news-buyer-s-guide-best-android-phones-image30-r9f0oldzd7-jpg.webp?v1' :
+                  product.category == 'Laptop' ?
+                  'https://www.cnet.com/a/img/resize/3599cd5e2e3a7423a49de0da1a9de2a84e8e3d16/hub/2018/02/13/517fda12-de2a-4c3f-bee5-05daaf870537/01laptops-with-longest-battery-life-2018-feb.jpg?auto=webp&width=1092' :
+                  product.category == 'PC' ?
+                  'https://www.pcspecialist.ie/images/landing/pcs/gaming-pc/gaming_pc_headline_pcs.jpg' :
+                  product.category == 'Monitor' ?
+                  'https://www.etonline.com/sites/default/files/styles/max_1280x720/public/images/2022-02/Presidents%20Day%20Deals%20on%20Monitors%20lead%20image.jpg?h=c6a2037e&itok=-e7pskO0' :
+                  product.category == 'Headphones' ?
+                  'https://static.onecms.io/wp-content/uploads/sites/28/2022/03/11/amazon-headphones-tout-AMZN-HDPHN0322.jpg' :
+                  product.category == 'Charger' ?
+                  'http://estv.ro/wp-content/uploads/2014/03/incarcator-universal_1.jpg' :
+                  product.category == 'Mouse' ?
+                  'https://www.popsci.com/uploads/2021/10/08/Best-Cheap-Gaming-Mice-Header.jpg?auto=webp' :
+                  product.category == 'Keyboard' ?
+                  'https://cdn.mos.cms.futurecdn.net/2XAcdDGjcdFrwJ7VxfY6i3-1200-80.jpg' :
+                  'https://www.cnet.com/a/img/resize/3599cd5e2e3a7423a49de0da1a9de2a84e8e3d16/hub/2018/02/13/517fda12-de2a-4c3f-bee5-05daaf870537/01laptops-with-longest-battery-life-2018-feb.jpg?auto=webp&width=1092'"
+                  style="width: 100%; max-height: 500px;"/>
+            </ion-slide>
+          </ion-slides>
           <ion-card-header class="ion-text-center">
             <ion-card-title>{{product.name}}</ion-card-title>
           </ion-card-header>
@@ -73,3 +97,27 @@
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary" style="height: 50px">
+    <ion-grid>
+      <ion-row class="ion-justify-content-evenly">
+        <ion-col offset="0" size="2">
+          <ion-item (click)="about('https://www.facebook.com')" lines="none" color="transparent" button>
+            <ion-icon name="logo-facebook"></ion-icon>
+          </ion-item>
+        </ion-col>
+        <ion-col offset="2" size="2">
+          <ion-item (click)="about('https://www.instagram.com')" lines="none" color="transparent" button>
+            <ion-icon name="logo-instagram"></ion-icon>
+          </ion-item>
+        </ion-col>
+        <ion-col offset="1" size="1">
+          <ion-item (click)="about('https://www.twitter.com')" lines="none" color="transparent" button>
+            <ion-icon name="logo-twitter"></ion-icon>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

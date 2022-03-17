@@ -3,6 +3,7 @@ using GetaGadget.Domain.DTO.User;
 using GetaGadget.Domain.Entities;
 using GetaGadget.Domain.Interfaces;
 using System;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -74,6 +75,20 @@ namespace GetaGadget.BusinessLogic.Services
                 var hashedBytes = sha1.ComputeHash(Encoding.UTF8.GetBytes(password + salt));
                 return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
             }
+        }
+
+        public void SendContactMail(int userId, ContactModel model)
+        {
+            var user = UnitOfWork.UserRepository.Get(userId);
+
+            var mailMessage = new MailMessage(user.EmailAddress, "getagadget@contact.com");
+
+            mailMessage.Subject = model.Subject;
+            mailMessage.Body = model.Body;
+
+            var client = new SmtpClient("localhost", 25);
+
+            client.Send(mailMessage);
         }
     }
 }

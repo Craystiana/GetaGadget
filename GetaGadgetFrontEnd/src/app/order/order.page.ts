@@ -26,27 +26,29 @@ export class OrderPage implements OnInit {
   initData(){
     this.orderService.getOrder().pipe(take(1)).subscribe(data =>{
       this.order = data;
-      this.productService.getCoupons().pipe(take(1)).subscribe(
-        data => {
-          this.coupons = data;
-          var valid = null;
-          for (var coupon of this.coupons) {
-            if (this.order.totalValue > coupon.minOrderValue){
-              valid = coupon;
-            }
-          }
-        
-          if (valid != null){
-            this.toastCtrl.create({
-              message: 'Use code ' + valid.code + ' to get a discount',
-              position: 'top',
-              color: 'success',
-              duration: 5000,
-              buttons: ['I\'m rich', 'I\'ll remember']
-            }).then((el) => el.present())
-          }
-        }
-      );
+    });
+  }
+
+  changeProductQuantity(productId, quantity){
+    this.orderService.changeProductQuantity(productId, quantity).pipe(first()).subscribe(
+      () => {
+        this.initData();
+        this.toastCtrl.create({
+          message: 'Product quantity changed',
+          duration: 5000,
+          position: 'bottom',
+          color: 'success',
+          buttons: ['Dismiss']
+        }).then((el) => el.present());
+      },
+      () => {
+        this.toastCtrl.create({
+          message: 'Unable to change product quantity',
+          duration: 5000,
+          position: 'bottom',
+          color: 'danger',
+          buttons: ['Dismiss']
+        }).then((el) => el.present());
     });
   }
 
@@ -94,5 +96,9 @@ export class OrderPage implements OnInit {
           buttons: ['Dismiss']
         }).then((el) => el.present());
     });
+  }
+
+  public about(url){
+    window.open(url);
   }
 }

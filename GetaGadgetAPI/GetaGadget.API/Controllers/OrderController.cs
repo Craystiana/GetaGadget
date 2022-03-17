@@ -44,6 +44,24 @@ namespace GetaGadget.API.Controllers
         }
 
         [HttpPost]
+        [Route("Change")]
+        [GetaGadgetAuthorize]
+        public IActionResult Add([FromQuery] int productId, [FromQuery] int quantity)
+        {
+            try
+            {
+                _orderService.ChangeProductQuantity((int)GetCurrentUserId(), productId, quantity);
+
+                return new JsonResult(true);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error changing product quantity");
+                return StatusCode((int)HttpStatusCode.InternalServerError);
+            }
+        }
+
+        [HttpPost]
         [Route("Add")]
         [GetaGadgetAuthorize]
         public IActionResult Add([FromQuery] int productId)

@@ -27,6 +27,14 @@ const routes: Routes = [
     loadChildren: () => import('./wishlist/wishlist.module').then( m => m.WishlistPageModule)
   },
   {
+    path: 'geolocation',
+    loadChildren: () => import('./geolocation/geolocation.module').then( m => m.GeolocationPageModule)
+  },
+  {
+    path: 'contact',
+    loadChildren: () => import('./contact/contact.module').then( m => m.ContactPageModule)
+  },
+  {
     path: "**",
     redirectTo: 'product'
   }

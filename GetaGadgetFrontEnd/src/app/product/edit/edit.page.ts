@@ -119,4 +119,7 @@ export class EditPage implements OnInit {
     }
   }
 
+  public about(url){
+    window.open(url);
+  }
 }

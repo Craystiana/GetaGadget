@@ -35,4 +35,8 @@ export class HistoryPage implements OnInit {
     this.currentOrder = order;
     this.history = undefined;
   }
+
+  public about(url){
+    window.open(url);
+  }
 }

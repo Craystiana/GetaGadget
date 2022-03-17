@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { API_URL, ORDER_ADD_URL, ORDER_DELETE_URL, ORDER_HISTORY_URL, ORDER_INDEX_URL, ORDER_PLACE_URL } from 'src/environments/environment';
+import { API_URL, ORDER_ADD_URL, ORDER_DELETE_URL, ORDER_HISTORY_URL, ORDER_INDEX_URL, ORDER_PLACE_URL, ORDER_CHANGE_QUANTITY_URL } from 'src/environments/environment';
 import { Order } from '../models/order/order';
 import { OrderHistory } from '../models/order/orderHistory';
 import { PlaceOrder } from '../models/order/placeOrder';
@@ -17,6 +17,14 @@ export class OrderService {
     return this.http.get(API_URL + ORDER_INDEX_URL).pipe(
       map((data : Order) => {
         return data;
+      })
+    )
+  }
+
+  public changeProductQuantity(productId : number, quantity : number) {
+    return this.http.post(API_URL + ORDER_CHANGE_QUANTITY_URL + '?productId=' + productId + '&quantity=' + quantity, null).pipe(
+      map((result : boolean) => {
+        return result;
       })
     )
   }
