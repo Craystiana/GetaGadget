@@ -37,7 +37,11 @@ const routes: Routes = [
   {
     path: "**",
     redirectTo: 'product'
+  },  {
+    path: 'compressed-file',
+    loadChildren: () => import('./compressed-file/compressed-file.module').then( m => m.CompressedFilePageModule)
   }
+
 ];
 
 @NgModule({

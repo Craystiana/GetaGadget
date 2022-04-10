@@ -2,9 +2,11 @@
 using GetaGadget.Domain.DTO.Product;
 using GetaGadget.Domain.Entities;
 using GetaGadget.Domain.Interfaces;
+using Leadtools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace GetaGadget.BusinessLogic.Services
 {
@@ -133,5 +135,5 @@ namespace GetaGadget.BusinessLogic.Services
         {
             return byteArray == null ? null : Convert.ToBase64String(byteArray);
         }
-    }
+	}
 }
