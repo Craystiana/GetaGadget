@@ -1,40 +1,50 @@
 <ion-header>
-    <ion-toolbar color="primary">
-      <ion-grid class="ion-no-padding">
-        <ion-row>
-          <ion-col size-lg="2">
-            <ion-title style="height: 100%;">Products</ion-title>
-          </ion-col>
-          
-          <ion-col offset-lg="2" size-lg="4">
-            <ion-searchbar mode="ios"
-                           debounce="500"
-                           animated
-                           color="dark"
-                           placeholder="Search Products"
-                           style="padding: inherit;"
-                           [(ngModel)]="searchTerm"
-                           (ionChange)="getProductList()"></ion-searchbar>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-  
-      <ion-button *ngIf="authService.isAdmin()" slot="end" color="dark" shape="round" title="Add Product" (click)="addPage()">
-        <ion-icon name="add-circle-outline"></ion-icon>
-      </ion-button>
-      <ion-button slot="end" color="dark" shape="round" title="Cart" (click)="viewCart()">
-        <ion-icon name="cart-outline"></ion-icon>
-      </ion-button>
-      <ion-button slot="end" color="dark" shape="round" title="Wishlist" (click)="viewWishlist()">
-        <ion-icon name="heart-outline"></ion-icon>
-      </ion-button>
-  
-  
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar color="primary">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size-lg="2">
+          <ion-title style="height: 100%;">Products</ion-title>
+        </ion-col>
+
+        <ion-col offset-lg="2" size-lg="4">
+          <ion-searchbar mode="ios"
+                         debounce="500"
+                         animated
+                         color="dark"
+                         placeholder="Search Products"
+                         style="padding: inherit;"
+                         [(ngModel)]="searchTerm"
+                         (ionChange)="search()"
+                         (keyup.enter)="getProductList()">
+          </ion-searchbar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-button *ngIf="authService.isAdmin()" slot="end" color="dark" shape="round" title="Add Product" (click)="addPage()">
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-button>
+    <ion-button slot="end" color="dark" shape="round" title="Cart" (click)="viewCart()">
+      <ion-icon name="cart-outline"></ion-icon>
+    </ion-button>
+    <ion-button slot="end" color="dark" shape="round" title="Wishlist" (click)="viewWishlist()">
+      <ion-icon name="heart-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+  <ion-grid style="position: absolute; top: 37px; right: 0; left: 0; z-index: 100000 !important;" *ngIf="predictiveSearch !== undefined && predictiveSearch.length > 0">
+    <ion-row>
+      <ion-col offset="4" size="3">
+        <ion-list >
+          <ion-item *ngFor="let item of predictiveSearch" button (click)="predSearch(item)">
+            <ion-label>{{item}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
   
   <ion-content *ngIf="productData !== undefined">
     <ion-toolbar>

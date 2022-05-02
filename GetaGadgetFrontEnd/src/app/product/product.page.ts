@@ -23,9 +23,11 @@ export class ProductPage implements OnInit {
   private category: number[];
   private sortBy: number;
   private inStock: boolean;
+  public wasPredSearchClicked: boolean;
 
   public productList: Product[];
   public isLoading = false;
+  public predictiveSearch: string[];
 
   public get sortType() : typeof SortType{
     return SortType;
@@ -92,5 +94,24 @@ export class ProductPage implements OnInit {
 
   public about(url){
     window.open(url);
+  }
+
+  search(): void{
+    if (this.wasPredSearchClicked){
+      this.wasPredSearchClicked = false;
+    } else {
+      this.productService.search(this.searchTerm).pipe(take(1)).subscribe(
+        data => {
+          this.predictiveSearch = data;
+        }
+      )
+    }
+  }
+
+  predSearch(item: string){
+    this.searchTerm = item;
+    this.wasPredSearchClicked = true;
+    this.getProductList();
+    this.predictiveSearch = [];
   }
 }

@@ -2,3 +2,12 @@ img:hover {
     webkit-filter: blur(4px); /* Chrome, Safari, Opera */
     filter: blur(4px);
 }
+
+ion-list {
+    margin-top: auto;
+}
+
+ion-header, ion-content {
+    display: flex;
+    flex-direction: column;
+}

@@ -56,6 +56,34 @@ export class DetailPage implements OnInit {
     );
   }
 
+  async ionViewWillEnter() {
+    const loading = await this.loadingController.create({
+      message: 'Loading product. Please wait...',
+      backdropDismiss: false
+    });
+
+    //await loading.present();
+
+    this.route.queryParams.subscribe(params => {
+      if (params) {
+        this.productId = params['productId'];
+      }
+      if(this.productId === undefined){
+        loading.dismiss();
+        this.router.navigateByUrl("/product");
+      }
+    });
+
+    this.productService.getProductDetails(this.productId)
+    .pipe(take(1))
+    .subscribe(
+      data => {
+        this.product = data;
+        //loading.dismiss;
+      }
+    );
+  }
+
   onDelete(){
     this.productService.delete(this.productId)
     .pipe(take(1))

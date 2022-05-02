@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Leadtools.Formats.Raster.Common" Version="22.0.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.19" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="8.30.0.37606">
       <PrivateAssets>all</PrivateAssets>

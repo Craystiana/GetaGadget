@@ -70,4 +70,12 @@ export class ProductService {
       })
     );
   }
+
+  public search(query){
+    return this.http.get(API_URL + '/product/search/' + query).pipe(
+      map((result: string[]) => {
+        return result;
+      })
+    )
+  }
 }
