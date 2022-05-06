@@ -33,7 +33,7 @@ namespace GetaGadget.DataAccess.Repositories
 
             if (!string.IsNullOrEmpty(search))
             {
-                products = products.Where(c => c.Name.Contains(search));
+                products = products.Where(c => c.Name.Contains(search) || c.Description.Contains(search));
             }
 
             if (providerIds != null && providerIds.Any())

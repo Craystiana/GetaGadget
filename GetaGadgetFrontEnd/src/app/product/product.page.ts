@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PopoverController, ToastController } from '@ionic/angular';
+import { ModalController, PopoverController, ToastController } from '@ionic/angular';
 import { first, take } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 import { SortType } from '../common/sortType';
@@ -8,6 +8,7 @@ import { Product } from '../models/product/product';
 import { ProductData } from '../models/product/productData';
 import { ProductQuery } from '../models/product/productQuery';
 import { ProductService } from './product.service';
+import { SearchPage } from './search/search.page';
 
 @Component({
   selector: 'app-product',
@@ -24,6 +25,7 @@ export class ProductPage implements OnInit {
   private sortBy: number;
   private inStock: boolean;
   public wasPredSearchClicked: boolean;
+  private searchData: Product[];
 
   public productList: Product[];
   public isLoading = false;
@@ -33,7 +35,7 @@ export class ProductPage implements OnInit {
     return SortType;
   }
 
-  constructor(private productService: ProductService, private popoverController: PopoverController, private toastCtrl: ToastController, private router: Router, private authService : AuthService) { }
+  constructor(private productService: ProductService, private popoverController: PopoverController, private toastCtrl: ToastController, private router: Router, private authService : AuthService, public modalController: ModalController) { }
 
   ngOnInit() {
     this.fetchStaticData();
@@ -56,8 +58,16 @@ export class ProductPage implements OnInit {
 
     this.productService.getProductList(model).pipe(first()).subscribe(
       data =>{
-        this.productList = data;
+        if (this.searchTerm == undefined) {
+          this.productList = data;
+        } else {
+          this.searchData = data;
+        }
         this.isLoading = false;
+        
+        if (this.searchTerm != undefined) {
+          this.presentModal();
+        }
       },
       error => {
         this.toastCtrl.create({
@@ -113,5 +123,17 @@ export class ProductPage implements OnInit {
     this.wasPredSearchClicked = true;
     this.getProductList();
     this.predictiveSearch = [];
+  }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: SearchPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        "productList": this.searchData,
+        "searchTerm": this.searchTerm
+      }
+    });
+    return await modal.present();
   }
 }
